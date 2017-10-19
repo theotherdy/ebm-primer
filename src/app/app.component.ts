@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 
+//import { NnttComponent } from './nntt/nntt.component';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
