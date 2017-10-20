@@ -1,0 +1,26 @@
+.cates-graph {
+  /*width: 430px;*/
+  padding-top: 10px;
+}
+
+.good-outcome {
+  color: #4CAF50;   
+}
+
+.better-with-treatment {
+  color: #FFEB3B;  
+}
+
+.bad-outcome {
+  color: #F44336;   
+}
+
+.better-with-control {
+  color: #4CAF50;  
+}
+
+@media screen and (max-width: 450px) {
+    .cates-person {
+      font-size: 0.75em;
+    }
+}
