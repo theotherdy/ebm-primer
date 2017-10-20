@@ -11,6 +11,13 @@
 .results-column {
   padding: 0px 10px 10px 10px;
 }
+
+@media screen and (max-width: 959px) {
+    .results-column {
+      width: 100%;
+    }
+}
+
 .fixed-width-title {
   width: 150px;
 }
@@ -62,4 +69,8 @@
 
 .mat-expansion-panel-header-description {
   color: #444 ! important;
+}
+
+.results-tab-group {
+  width: 100%;
 }

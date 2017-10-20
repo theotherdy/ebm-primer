@@ -5,6 +5,7 @@ import { FormsModule }   from '@angular/forms';
 import { FlexLayoutModule } from "@angular/flex-layout";
 
 import { NnttModule } from './nntt/nntt.module';
+import { CatesModule } from './cates/cates.module';
 
 import { AppComponent } from './app.component';
 
@@ -16,7 +17,8 @@ import { AppComponent } from './app.component';
     BrowserModule,
     FormsModule,
     FlexLayoutModule,
-    NnttModule
+    NnttModule,
+    CatesModule
   ],
   providers: [],
   bootstrap: [AppComponent]

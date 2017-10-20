@@ -1,4 +1,4 @@
-import { IntegerValidator } from './integer.validator.directive';
+import { IntegerValidator } from './integer-validator.directive';
 
 describe('IntegerValidator', () => {
   it('should create an instance', () => {

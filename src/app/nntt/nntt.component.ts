@@ -15,6 +15,7 @@ export class NnttComponent implements OnInit {
 
     study: Study;
     studyForm: FormGroup;
+    //showCates: boolean = false;
 
     constructor() { }
 
@@ -56,5 +57,6 @@ export class NnttComponent implements OnInit {
         this.study.eventIndivInterv = formModel.eventIndivInterv
         this.study.noEventIndivInterv = formModel.noEventIndivInterv
         this.study.calculate();
+        //this.showCates = true;
     }
 }

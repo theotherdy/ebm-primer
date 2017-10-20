@@ -1,9 +1,9 @@
 export class Study {
     //Input
-    public eventIndivControl: number; //four mandatory values
-    public noEventIndivControl: number;
-    public eventIndivInterv: number;
-    public noEventIndivInterv: number;
+    public eventIndivControl: number = 30; //four mandatory values
+    public noEventIndivControl: number = 80;
+    public eventIndivInterv: number = 10;
+    public noEventIndivInterv: number = 90;
     //Calculated
     public totalIndivControl?: number; //? = optional
     public totalIndivInterv?: number;
@@ -27,6 +27,8 @@ export class Study {
     public numberNtt?: number;
     public numberNttLL95CI?: number;
     public numberNttUL95CI?: number;
+    
+    public updated: boolean = false;
     
     public calculate() {
         //console.log('calculating');
@@ -67,10 +69,16 @@ export class Study {
             this.relativeRiskReduction = this.riskDiff/this.eventRateControl;
         }
         
-        if(this.riskDiff && this.riskDiff>0) {
+        if(this.riskDiff && this.riskDiff!==0) {
             this.numberNtt = 1/this.riskDiff;
             this.numberNttLL95CI = 1/this.riskDiffUL95CI;
             this.numberNttUL95CI = 1/this.riskDiffLL95CI;
+        } else if (this.riskDiff && this.riskDiff===0) {
+            this.numberNtt = 0;
+            this.numberNttLL95CI = 0;
+            this.numberNttUL95CI = 0;
         }
+        
+        this.updated=true;
     }
 }

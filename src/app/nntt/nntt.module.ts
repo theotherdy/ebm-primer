@@ -9,6 +9,8 @@ import { SharedModule } from "../shared/shared.module";
 
 import { NnttComponent } from './nntt.component';
 
+import { CatesModule } from '../cates/cates.module';
+
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatTabsModule} from '@angular/material';
 import {MatFormFieldModule} from '@angular/material';
@@ -30,7 +32,8 @@ import {MatExpansionModule} from '@angular/material';
         MatInputModule,
         MatButtonModule,
         MatIconModule,
-        MatExpansionModule
+        MatExpansionModule,
+        CatesModule
     ],
     declarations: [NnttComponent],
     exports:      [ NnttComponent ],
