@@ -15,7 +15,14 @@ export class NnttComponent implements OnInit {
 
     study: Study;
     studyForm: FormGroup;
-    //showCates: boolean = false;
+    
+    /* Cates numbers */
+    noOfGood: number;
+    noOfLetDown: number;
+    noOfOK: number;
+    noOfBad: number;
+    denominator: number = 100;
+    noOfRowsAndColumns: number;
 
     constructor() { }
 
@@ -57,6 +64,20 @@ export class NnttComponent implements OnInit {
         this.study.eventIndivInterv = formModel.eventIndivInterv
         this.study.noEventIndivInterv = formModel.noEventIndivInterv
         this.study.calculate();
-        //this.showCates = true;
+        
+        /* Calculate Cates numbers*/
+        this.noOfRowsAndColumns = Math.sqrt(this.denominator);
+        this.noOfBad = Math.round(this.study.eventRateInterv * this.denominator);
+        this.noOfOK = 0; 
+        this.noOfLetDown = 0; 
+        if(this.study.riskDiff > 0) {
+            this.noOfOK = Math.round(this.study.riskDiff * this.denominator);
+            this.noOfGood = this.denominator - (this.noOfOK + this.noOfBad);
+        } else if (this.study.riskDiff < 0) {
+            this.noOfLetDown = Math.abs(Math.round(this.study.riskDiff * this.denominator));//make positive as riskDiff is -ve
+            this.noOfGood = this.denominator - this.noOfBad;
+            this.noOfBad = this.noOfBad - this.noOfLetDown; //ie better with control includes those who would have been better with control
+        } 
+        
     }
 }

@@ -13,6 +13,9 @@
 }
 
 @media screen and (max-width: 959px) {
+    .input-column {
+      width: 100%;
+    }
     .results-column {
       width: 100%;
     }

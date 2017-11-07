@@ -11,14 +11,6 @@ import { NnttComponent } from './nntt.component';
 
 import { CatesModule } from '../cates/cates.module';
 
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MatTabsModule} from '@angular/material';
-import {MatFormFieldModule} from '@angular/material';
-import {MatInputModule} from '@angular/material';
-import {MatButtonModule} from '@angular/material';
-import {MatIconModule} from '@angular/material';
-import {MatExpansionModule} from '@angular/material';
-
 @NgModule({
     imports: [
         CommonModule,
@@ -26,16 +18,9 @@ import {MatExpansionModule} from '@angular/material';
         ReactiveFormsModule,
         FlexLayoutModule,
         SharedModule,
-        BrowserAnimationsModule,
-        MatTabsModule,
-        MatFormFieldModule,
-        MatInputModule,
-        MatButtonModule,
-        MatIconModule,
-        MatExpansionModule,
         CatesModule
     ],
-    declarations: [NnttComponent],
+    declarations: [ NnttComponent ],
     exports:      [ NnttComponent ],
     providers:    []
 })
