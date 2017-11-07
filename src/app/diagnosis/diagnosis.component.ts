@@ -21,6 +21,10 @@ export class DiagnosisComponent implements OnInit {
     noOfLetDown: number;
     noOfOK: number;
     noOfBad: number;
+    textGood: string = 'Negative test, condition absent';
+    textLetDown: string = 'Negative test, condition present';
+    textOK: string = 'Positive test, condition absent';
+    textBad: string = 'Positive test, condition present';
     denominator: number = 100;
     noOfRowsAndColumns: number;
 

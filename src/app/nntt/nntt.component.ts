@@ -21,6 +21,10 @@ export class NnttComponent implements OnInit {
     noOfLetDown: number;
     noOfOK: number;
     noOfBad: number;
+    textGood: string = 'Good outcome';
+    textLetDown: string = 'Better without treatment';
+    textOK: string = 'Better with treatment';
+    textBad: string = 'Bad outcome';
     denominator: number = 100;
     noOfRowsAndColumns: number;
 

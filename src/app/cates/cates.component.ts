@@ -22,6 +22,10 @@ export class CatesComponent implements OnInit, OnChanges {
     @Input() noOfLetDown: number;  
     @Input() noOfOK: number;
     @Input() noOfBad: number;
+    @Input() textGood: string; 
+    @Input() textLetDown: string;  
+    @Input() textOK: string;
+    @Input() textBad: string;
     @Input() noOfRowsAndColumns: number;
     
     //noOfRowsAndColumns: number;
