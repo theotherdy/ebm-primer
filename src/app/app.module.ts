@@ -15,12 +15,13 @@ import { DiagnosisModule } from './diagnosis/diagnosis.module';
 import { CatesModule } from './cates/cates.module';
 //import { NavbarModule } from './navbar/navbar.module';
 import { NavbarComponent } from './navbar/navbar.component';
+import { ChangerModule } from './changer/changer.module';
 
 
 @NgModule({
     declarations: [
         AppComponent,
-        NavbarComponent
+        NavbarComponent,
     ],
     imports: [
         BrowserModule,
@@ -31,6 +32,7 @@ import { NavbarComponent } from './navbar/navbar.component';
         NnttModule,
         DiagnosisModule,
         CatesModule,
+        ChangerModule,
         //NavbarModule
     ],
     providers: [],

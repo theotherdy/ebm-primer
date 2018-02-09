@@ -10,6 +10,8 @@ export class Diagnosis {
     
     public totalIndivNegative?: number;
     public totalIndivPositive?: number;
+    
+    public totalIndiv?: number;
         
     public sensitivity?: number; //? = optional
     public specificity?: number;
@@ -29,6 +31,8 @@ export class Diagnosis {
         
         this.totalIndivNoDisease = this.positiveIndivNoDisease + this.negativeIndivNoDisease;
         this.totalIndivDisease = this.positiveIndivDisease + this.negativeIndivDisease;
+        
+        this.totalIndiv = this.totalIndivNoDisease + this.totalIndivDisease;
         
         this.totalIndivNegative = this.negativeIndivNoDisease + this.negativeIndivDisease;
         this.totalIndivPositive = this.positiveIndivNoDisease + this.positiveIndivDisease;

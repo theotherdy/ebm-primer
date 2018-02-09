@@ -10,30 +10,31 @@
                 <form [formGroup]="studyForm" (ngSubmit)="onSubmit()">
                     <div fxLayout='row' fxLayoutAlign="start start"> 
                         <div fxFlex fxLayout='column' class="form-column">
-                            <h3>Control</h3>
+                            <h3>Event</h3>
                             <mat-form-field class="full-width">
-                                <input type="number" min="0" step="1" matInput required formControlName="eventIndivControl" name="eventIndivControl" placeholder="Event" class="full-width">
+                                <input type="number" min="0" step="1" matInput required formControlName="eventIndivInterv" name="eventIndivInterv" placeholder="Intervention" class="full-width">
                                 <mat-error>
                                     Please enter a non-negative integer
                                 </mat-error>
                             </mat-form-field>
                             <mat-form-field class="full-width">
-                                <input type="number" min="0" step="1" matInput required formControlName="noEventIndivControl" name="noEventIndivControl" placeholder="No event" class="full-width">  
+                                <input type="number" min="0" step="1" matInput required formControlName="eventIndivControl" name="eventIndivControl" placeholder="Control" class="full-width">
                                 <mat-error>
                                     Please enter a non-negative integer
                                 </mat-error>
                             </mat-form-field>
                         </div>
                         <div fxFlex class="form-column">
-                            <h3>Intervention</h3>
+                            <h3>No event</h3>
+                            
                             <mat-form-field class="full-width">
-                                <input type="number" min="0" step="1" matInput required formControlName="eventIndivInterv" name="eventIndivInterv" placeholder="Event" class="full-width">
+                                <input type="number" min="0" step="1" matInput required formControlName="noEventIndivInterv" name="noEventIndivInterv" placeholder="Intervention" class="full-width"> 
                                 <mat-error>
                                     Please enter a non-negative integer
                                 </mat-error>
                             </mat-form-field>
                             <mat-form-field class="full-width">
-                                <input type="number" min="0" step="1" matInput required formControlName="noEventIndivInterv" name="noEventIndivInterv" placeholder="No event" class="full-width"> 
+                                <input type="number" min="0" step="1" matInput required formControlName="noEventIndivControl" name="noEventIndivControl" placeholder="Control" class="full-width">  
                                 <mat-error>
                                     Please enter a non-negative integer
                                 </mat-error>
@@ -42,7 +43,7 @@
                     </div>
                     <div fxLayout='row' fxLayoutAlign="end start">
                         <div fxFlex="nogrow" class="button-container">
-                            <button mat-fab type="submit" [disabled]="!studyForm.valid" class="btn btn-success"><mat-icon>done</mat-icon></button>
+                            <button mat-raised-button type="submit" [disabled]="!studyForm.valid" class="btn btn-success" color="accent">Calculate<!--mat-icon>done</mat-icon--></button>
                         </div>
                     </div>
                 </form>
@@ -55,26 +56,26 @@
                             <mat-expansion-panel>
                                 <mat-expansion-panel-header title="Relative Risk">
                                     <mat-panel-title class="fixed-width-title">
-                                        RR
+                                        Relative Risk
                                     </mat-panel-title>
-                                    <mat-panel-description>
-                                        {{study?.relativeRisk | number:'1.2-2'}}
+                                    <mat-panel-description *ngIf="study?.relativeRisk">
+                                        {{study?.relativeRisk * 100 | number:'1.0-0'}}%
                                     </mat-panel-description>
                                 </mat-expansion-panel-header>
-                                <h3>Relative Risk</h3>
-                                <p>Relative Risk is the ratio of the risk of an event in the intervention group compared to the control group: RR = IER / CER</p>
+                                <!--h3>Relative Risk</h3-->
+                                <p><em>Relative Risk</em> (RR) is the ratio of the risk of an event in the intervention group event rate (IER) compared to the control group event rate (CER): RR = IER / CER</p>
                             </mat-expansion-panel>
                             <mat-expansion-panel>
                                 <mat-expansion-panel-header title="Risk Difference">
                                     <mat-panel-title class="fixed-width-title">
-                                        RD
+                                        Risk Difference
                                     </mat-panel-title>
-                                    <mat-panel-description>
-                                        {{study?.riskDiff | number:'1.2-2'}}
+                                    <mat-panel-description *ngIf="study?.riskDiff">
+                                        {{study?.riskDiff * 100| number:'1.0-0'}}%
                                     </mat-panel-description>
                                 </mat-expansion-panel-header>
-                                <h3>Risk Difference</h3>
-                                <p>Risk Difference is the difference in the event rate between control group and intervention group: RD=CER-IER</p>
+                                <!--h3>Risk Difference</h3-->
+                                <p><em>Risk Difference</em> (RD) is the difference in the event rate between control group event rate (CER) and intervention group event rate (IER): RD=CER-IER</p>
                                 <div fxLayout='row' fxLayoutAlign="center top">
                                     <div fxFlex="20%" class="number-ll">Lower 95% CI</div>
                                     <div fxFlex="20%" class="number-mean">Risk Difference</div>
@@ -89,22 +90,22 @@
                                     <div fxFlex="30%" class="right-whisker-bottom"></div>
                                 </div>
                                 <div fxLayout='row' fxLayoutAlign="center top">
-                                    <div fxFlex="20%" class="number-ll">{{study?.riskDiffLL95CI | number:'1.2-2'}}</div>
-                                    <div fxFlex="20%" class="number-mean">{{study?.riskDiff | number:'1.2-2'}}</div>
-                                    <div fxFlex="20%" class="number-ul">{{study?.riskDiffUL95CI | number:'1.2-2'}}</div>
+                                    <div fxFlex="20%" class="number-ll" *ngIf="study?.riskDiffLL95CI">{{study?.riskDiffLL95CI * 100| number:'1.0-0'}}%</div>
+                                    <div fxFlex="20%" class="number-mean" *ngIf="study?.riskDiff">{{study?.riskDiff * 100 | number:'1.0-0'}}%</div>
+                                    <div fxFlex="20%" class="number-ul" *ngIf="study?.riskDiffUL95CI">{{study?.riskDiffUL95CI * 100 | number:'1.0-0'}}%</div>
                                 </div>
                             </mat-expansion-panel>
                             <mat-expansion-panel>
                                 <mat-expansion-panel-header title="Odds Ratio">
                                     <mat-panel-title class="fixed-width-title">
-                                        OR
+                                        Odds Ratio
                                     </mat-panel-title>
                                     <mat-panel-description>
                                         {{study?.oddsRatio | number:'1.2-2'}}
                                     </mat-panel-description>
                                 </mat-expansion-panel-header>
-                                <h3>Odds Ratio</h3>
-                                <p>The odds of an event happening in the intervention group divided by the odds in the control group: Odds Intervention/Odds Control</p>
+                                <!--h3>Odds Ratio</h3-->
+                                <p><em>Odds Ratio</em> (OR) odds of an event happening in the intervention group (IO) divided by the odds in the control group (CO): OR = IO/CO</p>
                                 <div fxLayout='row' fxLayoutAlign="center top">
                                     <div fxFlex="20%" class="number-ll">Lower 95% CI</div>
                                     <div fxFlex="20%" class="number-mean">Odds Ratio</div>
@@ -127,26 +128,26 @@
                             <mat-expansion-panel>
                                 <mat-expansion-panel-header title="Relative Risk Reduction">
                                     <mat-panel-title class="fixed-width-title">
-                                        RRR
+                                        Relative Risk Reduction
                                     </mat-panel-title>
-                                    <mat-panel-description>
-                                        {{study?.relativeRiskReduction | number:'1.2-2'}}
+                                    <mat-panel-description *ngIf="study?.relativeRiskReduction">
+                                        {{study?.relativeRiskReduction * 100 | number:'1.0-0'}}%
                                     </mat-panel-description>
                                 </mat-expansion-panel-header>
-                                <h3>Relative Risk Reduction</h3>
-                                <p>Relative Risk Reduction is the percentage reduction in events in the intervention group event rate (EER) compared to the control group event rate (CER): RRR=(CER-IER)/CER</p>
+                                <!--h3>Relative Risk Reduction</h3-->
+                                <p><em>Relative Risk Reduction (RRR)</em> is the percentage reduction in events in the intervention group event rate (IER) compared to the control group event rate (CER): RRR=(CER-IER)/CER * 100</p>
                             </mat-expansion-panel>
                             <mat-expansion-panel>
                                 <mat-expansion-panel-header title="Number Needed to Treat">
                                     <mat-panel-title class="fixed-width-title">
-                                        NNT
+                                        Number Needed to Treat
                                     </mat-panel-title>
                                     <mat-panel-description>
                                         {{study?.numberNtt | number:'1.1-1'}}
                                     </mat-panel-description>
                                 </mat-expansion-panel-header>
-                                <h3>Number Needed to Treat</h3>
-                                <p>Number Needed to Treat is the number of patients, on average, who need to be treated to prevent one bad outcome. It is the inverse of the RD: NNT=1/RD</p>
+                                <!--h3>Number Needed to Treat</h3-->
+                                <p><em>Number Needed to Treat</em> (NNT) is the number of patients, on average, who need to be treated to prevent one bad outcome. It is the inverse of the RD: NNT=1/RD</p>
                                 <div fxLayout='row' fxLayoutAlign="center top">
                                     <div fxFlex="20%" class="number-ll">Lower 95% CI</div>
                                     <div fxFlex="20%" class="number-mean">Number Needed to Treat</div>

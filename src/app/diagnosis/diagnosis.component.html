@@ -7,45 +7,130 @@
     <mat-tab label="Advanced"-->
         <div fxLayout='row' fxLayout.lt-md="column" fxLayoutAlign="start start">
             <div fxFlex="33%" class="input-column"> 
-                <form [formGroup]="diagnosisForm" (ngSubmit)="onSubmit()">
-                    <div fxLayout='row' fxLayoutAlign="start start"> 
-                        <div fxFlex fxLayout='column' class="form-column">
-                            <h3>No Condition</h3>
-                            <mat-form-field class="full-width">
-                                <input type="number" min="0" step="1" matInput required formControlName="positiveIndivNoDisease" name="positiveIndivNoDisease" placeholder="Positive test" class="full-width">
-                                <mat-error>
-                                    Please enter a non-negative integer
-                                </mat-error>
-                            </mat-form-field>
-                            <mat-form-field class="full-width">
-                                <input type="number" min="0" step="1" matInput required formControlName="negativeIndivNoDisease" name="negativeIndivNoDisease" placeholder="Negative test" class="full-width">  
-                                <mat-error>
-                                    Please enter a non-negative integer
-                                </mat-error>
-                            </mat-form-field>
+                <mat-card class="example-card">
+                    <mat-card-header>
+                        <div mat-card-avatar><mat-icon class="size-40">keyboard</mat-icon></div>
+                        <mat-card-title>1. Calculate</mat-card-title>
+                        <mat-card-subtitle>Enter data and calculate</mat-card-subtitle>
+                    </mat-card-header>
+                    <mat-card-content>
+                        <form [formGroup]="diagnosisForm" (ngSubmit)="onSubmit()">
+                            <div fxLayout='row' fxLayoutAlign="start start"> 
+                                <div fxFlex class="form-column">
+                                    <h3>Condition</h3>
+                                    <mat-form-field class="full-width">
+                                        <input type="number" min="0" step="1" matInput required formControlName="positiveIndivDisease" name="positiveIndivDisease" placeholder="Positive test" class="full-width" [class.pulse]="positiveIndivDiseaseChanged">
+                                        <mat-error>
+                                            Please enter a non-negative integer
+                                        </mat-error>
+                                    </mat-form-field>
+                                    <mat-form-field class="full-width">
+                                        <input type="number" min="0" step="1" matInput required formControlName="negativeIndivDisease" name="negativeIndivDisease" placeholder="Negative test" class="full-width" [class.pulse]="negativeIndivDiseaseChanged"> 
+                                        <mat-error>
+                                            Please enter a non-negative integer
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div fxFlex fxLayout='column' class="form-column">
+                                    <h3>No Condition</h3>
+                                    <mat-form-field class="full-width">
+                                        <input type="number" min="0" step="1" matInput required formControlName="positiveIndivNoDisease" name="positiveIndivNoDisease" placeholder="Positive test" class="full-width" [class.pulse]="positiveIndivNoDiseaseChanged">
+                                        <mat-error>
+                                            Please enter a non-negative integer
+                                        </mat-error>
+                                    </mat-form-field>
+                                    <mat-form-field class="full-width">
+                                        <input type="number" min="0" step="1" matInput required formControlName="negativeIndivNoDisease" name="negativeIndivNoDisease" placeholder="Negative test" class="full-width" [class.pulse]="negativeIndivNoDiseaseChanged">  
+                                        <mat-error>
+                                            Please enter a non-negative integer
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div fxLayout='row' fxLayoutAlign="end start">
+                                <div fxFlex="nogrow" class="button-container">
+                                    <button mat-raised-button type="submit" [disabled]="!diagnosisForm.valid" class="btn btn-success" color="accent">Calculate<!--mat-icon>done</mat-icon--></button>
+                                </div>
+                            </div>
+                        </form>    
+                    </mat-card-content>
+                </mat-card>
+                <mat-card class="example-card">
+                    <mat-card-header>
+                        <div mat-card-avatar><mat-icon class="size-40">timeline</mat-icon></div>
+                        <mat-card-title>2. Simulate</mat-card-title>
+                        <mat-card-subtitle>Increase or decrease with % sliders</mat-card-subtitle>
+                    </mat-card-header>
+                    <mat-card-content>
+                        <div fxLayout='row' fxLayout.lt-md="column" fxLayoutAlign="stretch start"> 
+                            <div fxFlex="33">
+                                Prevalence (%):
+                            </div>
+                            <div fxFlex="67">
+                                <mat-slider 
+                                    class="full-width" 
+                                    min="-100" 
+                                    max="100" 
+                                    step="10" 
+                                    [(ngModel)]="adjustPrevalenceBy"
+                                    thumbLabel 
+                                    [disabled]="!calculated"
+                                    (change)="onAdjustPrevalence()"
+                                    >
+                                </mat-slider>
+                            </div>
+                            <div fxFlex="nogrow">
+                                <mat-icon matTooltip="Drag to increase or decrease prevalence by given %">help_outline</mat-icon>
+                            </div>
                         </div>
-                        <div fxFlex class="form-column">
-                            <h3>Condition</h3>
-                            <mat-form-field class="full-width">
-                                <input type="number" min="0" step="1" matInput required formControlName="positiveIndivDisease" name="positiveIndivDisease" placeholder="Positive test" class="full-width">
-                                <mat-error>
-                                    Please enter a non-negative integer
-                                </mat-error>
-                            </mat-form-field>
-                            <mat-form-field class="full-width">
-                                <input type="number" min="0" step="1" matInput required formControlName="negativeIndivDisease" name="negativeIndivDisease" placeholder="Negative test" class="full-width"> 
-                                <mat-error>
-                                    Please enter a non-negative integer
-                                </mat-error>
-                            </mat-form-field>
+                        <div fxLayout='row' fxLayout.lt-md="column" fxLayoutAlign="start start"> 
+                            <div fxFlex="33%">
+                                Sensitivity:
+                            </div>
+                            <div fxFlex="67%">
+                                <mat-slider 
+                                    class="full-width" 
+                                    min="0.01" 
+                                    max="1" 
+                                    step="0.01" 
+                                    [(ngModel)]="diagnosis.sensitivity"
+                                    thumbLabel 
+                                    [disabled]="!calculated"
+                                    (change)="onAdjustSensitivity()">
+                                </mat-slider>
+                            </div>
+                            <div fxFlex="nogrow">
+                                <mat-icon matTooltip="Drag to set value of sensitivity">help_outline</mat-icon>
+                            </div>
                         </div>
-                    </div>
-                    <div fxLayout='row' fxLayoutAlign="end start">
-                        <div fxFlex="nogrow" class="button-container">
-                            <button mat-fab type="submit" [disabled]="!diagnosisForm.valid" class="btn btn-success"><mat-icon>done</mat-icon></button>
+                        <div fxLayout='row' fxLayout.lt-md="column" fxLayoutAlign="start start"> 
+                            <div fxFlex="33%">
+                                Specificity:
+                            </div>
+                            <div fxFlex="67%">
+                                <mat-slider 
+                                    class="full-width" 
+                                    min="0.0" 
+                                    max="0.99" 
+                                    step="0.01" 
+                                    [(ngModel)]="diagnosis.specificity"
+                                    thumbLabel 
+                                    [disabled]="!calculated"
+                                    (change)="onAdjustSpecificity()"
+                                    >
+                                </mat-slider>
+                            </div>
+                                <div fxFlex="nogrow">
+                                <mat-icon matTooltip="Drag to set value of specificity">help_outline</mat-icon>
+                            </div>
                         </div>
-                    </div>
-                </form>
+                        <div fxLayout='row' fxLayoutAlign="end start">
+                                <div fxFlex="nogrow" class="button-container">
+                                    <button mat-raised-button [disabled]="!(calculated && simulated)" class="btn btn-success" color="accent" (click)="onReset()">Reset<!--mat-icon>done</mat-icon--></button>
+                                </div>
+                            </div>
+                    </mat-card-content>
+                </mat-card>
             </div>
             <div fxFlex="67%" class="results-column"> 
                 <mat-tab-group class="results-tab-group">
@@ -53,76 +138,103 @@
                         <!--h3>Results</h3-->
                         <mat-accordion>
                             <mat-expansion-panel>
-                                <mat-expansion-panel-header title="Sensitivity">
+                                <mat-expansion-panel-header>
                                     <mat-panel-title class="fixed-width-title">
                                         Sensitivity
                                     </mat-panel-title>
                                     <mat-panel-description>
-                                        {{diagnosis?.sensitivity | number:'1.2-2'}}
+                                        <changer-component [value]="diagnosis?.sensitivity | number:'1.2-2'"></changer-component>
                                     </mat-panel-description>
                                 </mat-expansion-panel-header>
-                                <h3>Sensitivity</h3>
+                                <!--h3>Sensitivity</h3-->
                                 <p>Sensitivity is the probability of a positive test among patients with the condition. Generally, a negative result with a test with high sensitivity (>=0.95) rules out the condition.</p>
                             </mat-expansion-panel>
                             <mat-expansion-panel>
-                                <mat-expansion-panel-header title="Specificity">
+                                <mat-expansion-panel-header>
                                     <mat-panel-title class="fixed-width-title">
                                         Specificity
                                     </mat-panel-title>
                                     <mat-panel-description>
-                                        {{diagnosis?.specificity | number:'1.2-2'}}
+                                        <changer-component [value]="diagnosis?.specificity | number:'1.2-2'"></changer-component>
                                     </mat-panel-description>
                                 </mat-expansion-panel-header>
-                                <h3>Specificity</h3>
+                                <!--h3>Specificity</h3-->
                                 <p>Specificity is the probability of a negative test among patients without the condition. Generally, a positive result with a test with high specificity (>=0.95) reliably confirms the condition.</p>
                             </mat-expansion-panel>
                             <mat-expansion-panel>
-                                <mat-expansion-panel-header title="+ve Predictive Value">
+                                <mat-expansion-panel-header>
                                     <mat-panel-title class="fixed-width-title">
-                                        +ve Predictive Value
+                                        Positive Predictive Value
                                     </mat-panel-title>
                                     <mat-panel-description>
-                                        {{diagnosis?.positivePredictiveValue | number:'1.2-2'}}
+                                        <changer-component [value]="diagnosis?.positivePredictiveValue | number:'1.2-2'"></changer-component>
                                     </mat-panel-description>
                                 </mat-expansion-panel-header>
-                                <h3>Positive predictive value</h3>
+                                <!--h3>Positive predictive value</h3-->
                                 <p>Positive predictive value is the probability of the condition among patients with a positive test.</p>
                             </mat-expansion-panel>
                             <mat-expansion-panel>
-                                <mat-expansion-panel-header title="-ve Predictive Value">
+                                <mat-expansion-panel-header>
                                     <mat-panel-title class="fixed-width-title">
-                                        -ve Predictive Value
+                                        Negative Predictive Value
                                     </mat-panel-title>
                                     <mat-panel-description>
-                                        {{diagnosis?.negativePredictiveValue | number:'1.2-2'}}
+                                        <changer-component [value]="diagnosis?.negativePredictiveValue | number:'1.2-2'"></changer-component>
                                     </mat-panel-description>
                                 </mat-expansion-panel-header>
-                                <h3>Negative predictive value</h3>
+                                <!--h3>Negative predictive value</h3-->
                                 <p>Negative predictive value is the probability of no condition among patients with a negative test.</p>
                             </mat-expansion-panel>
                             <mat-expansion-panel>
-                                <mat-expansion-panel-header title="-ve Predictive Value">
+                                <mat-expansion-panel-header title="+ve LR">
                                     <mat-panel-title class="fixed-width-title">
-                                        Probability disease +ve test
+                                        Positive Likelihood Ratio
                                     </mat-panel-title>
                                     <mat-panel-description>
-                                        {{diagnosis?.probDiseaseGivenPositive | number:'1.2-2'}}
+                                        <changer-component [value]="diagnosis?.likelihoodRatioPositive | number:'1.2-2'"></changer-component>
                                     </mat-panel-description>
                                 </mat-expansion-panel-header>
-                                <h3>Post-test probability of disease given a positive test</h3>
-                                <p>Also known as the <em>posterior probability of disease given a positive test</em> or the <em>positive predictive value</em>.</p>
+                                <!--h3>Positive Likelihood Ratio</h3-->
+                                <p>The <em>positive likelihood ratio</em> tells us how much we should increase the probability of a condition if the test is positive.</p>
+                                Interpreting likelihood ratios (source: http://medtrain.chm.msu.edu/ebm/Diagnosis/Diagnosis6.html)
+                                <table>
+                                    <tr>
+                                        <th>LR</th>
+                                        <th>Interpretation</th>
+                                    </tr>
+                                    <tr>
+                                        <th>>10</th>
+                                        <th>Large and often conclusive increase in the likelihood of disease</th>
+                                    </tr>
+                                    <tr>
+                                        <th>5-10</th>
+                                        <th>Moderate increase in the likelihood of disease</th>
+                                    </tr>
+                                    <tr>
+                                        <th>2-5</th>
+                                        <th>Small increase in the likelihood of disease</th>
+                                    </tr>
+                                    <tr>
+                                        <th>1 - 2</th>
+                                        <th>Minimal increase in the likelihood of disease</th>
+                                    </tr>
+                                    <tr>
+                                        <th>1</th>
+                                        <th><strong>No change</strong> in the likelihood of disease</th>
+                                    </tr>
+                                </table>
                             </mat-expansion-panel>
                             <mat-expansion-panel>
-                                <mat-expansion-panel-header title="-ve Predictive Value">
+                                <mat-expansion-panel-header title="-ve LR">
                                     <mat-panel-title class="fixed-width-title">
-                                        Probability disease -ve test
+                                        Negative Likelihood Ratio
                                     </mat-panel-title>
                                     <mat-panel-description>
-                                        {{diagnosis?.probDiseaseGivenNegative | number:'1.2-2'}}
+                                        <changer-component [value]="diagnosis?.likelihoodRatioNegative | number:'1.2-2'"></changer-component>
                                     </mat-panel-description>
                                 </mat-expansion-panel-header>
-                                <h3>Post-test probability of disease given a negative test</h3>
-                                <p>Also known as the <em>posterior probability of disease given a negative test</em>, this is the same as 1-(<em>negative predictive value</em>).</p>
+                                <!--h3>Negative Likelihood Ratio</h3-->
+                                <p>The <em>negative likelihood ratio</em> tells us how much we should increase the probability of a condition if the test is positive.</p>
                             </mat-expansion-panel>
                         </mat-accordion>
                     </mat-tab>

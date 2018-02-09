@@ -10,6 +10,7 @@ import { SharedModule } from "../shared/shared.module";
 import { DiagnosisComponent } from './diagnosis.component';
 
 import { CatesModule } from '../cates/cates.module';
+import { ChangerModule } from '../changer/changer.module';
 
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatTabsModule} from '@angular/material';
@@ -18,6 +19,9 @@ import {MatInputModule} from '@angular/material';
 import {MatButtonModule} from '@angular/material';
 import {MatIconModule} from '@angular/material';
 import {MatExpansionModule} from '@angular/material';
+import {MatSliderModule} from '@angular/material/slider';
+import {MatCardModule} from '@angular/material/card';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 @NgModule({
     imports: [
@@ -33,7 +37,11 @@ import {MatExpansionModule} from '@angular/material';
         MatButtonModule,
         MatIconModule,
         MatExpansionModule,
-        CatesModule
+        CatesModule,
+        MatSliderModule,
+        MatCardModule,
+        MatTooltipModule,
+        ChangerModule
     ],
     declarations: [ DiagnosisComponent ],
     exports:      [ DiagnosisComponent ],

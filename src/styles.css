@@ -5,3 +5,35 @@ body {
   font-family: Roboto,"Helvetica Neue",sans-serif;
   margin: 0;
 }
+
+mat-icon.size-40 {
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  font-size: 40px;
+}
+
+@keyframes textThrobAnimation {
+  0%   { color: #333; font-weight:normal}
+  50%  { color: #ff4081; font-weight:bolder }
+  100% { color: #333; font-weight:normal }
+}
+@-o-keyframes textThrobAnimation{
+  0%   { color: #333; font-weight:normal}
+  50%  { color: #ff4081; font-weight:bolder }
+  100% { color: #333; font-weight:normal }
+}
+@-moz-keyframes textThrobAnimation{
+  0%   { color: #333; font-weight:normal}
+  50%  { color: #ff4081; font-weight:bolder }
+  100% { color: #333; font-weight:normal }
+}
+@-webkit-keyframes textThrobAnimation{
+  0%   { color: #333; font-weight:normal}
+  50%  { color: #ff4081; font-weight:bolder }
+  100% { color: #333; font-weight:normal }
+}
+
+.pulse {
+    animation: textThrobAnimation 1s infinite;
+}

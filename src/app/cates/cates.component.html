@@ -1,19 +1,19 @@
 <mat-grid-list [cols]="noOfRowsAndColumns" rowHeight="1:1" class="cates-graph">
     <mat-grid-tile *ngFor="let catesPerson of catesPeople">
-        <span *ngIf="catesPerson.type==0" class="fa-stack fa-lg cates-person" [title]="textGood">
-            <i class="fa fa-circle fa-stack-2x good-outcome"></i>
+        <span *ngIf="catesPerson.type==0" class="fa-stack fa-lg cates-person" [matTooltip]="textGood">
+            <i class="fa fa-circle fa-stack-2x good-outcome shadow"></i>
             <i class="fa fa-smile-o fa-stack-2x"></i>
         </span>
-        <span *ngIf="catesPerson.type==1" class="fa-stack fa-lg cates-person" [title]="textOK">
-            <i class="fa fa-circle fa-stack-2x better-with-treatment"></i>
+        <span *ngIf="catesPerson.type==1" class="fa-stack fa-lg cates-person" [matTooltip]="textOK">
+            <i class="fa fa-circle fa-stack-2x better-with-treatment shadow"></i>
             <i class="fa fa-meh-o fa-stack-2x"></i>
         </span>
-        <span *ngIf="catesPerson.type==2" class="fa-stack fa-lg cates-person" [title]="textBad">
-            <i class="fa fa-circle fa-stack-2x bad-outcome"></i>
+        <span *ngIf="catesPerson.type==2" class="fa-stack fa-lg cates-person" [matTooltip]="textBad">
+            <i class="fa fa-circle fa-stack-2x bad-outcome shadow"></i>
             <i class="fa fa-frown-o fa-stack-2x"></i>
         </span>
-        <span *ngIf="catesPerson.type==3" class="fa-stack fa-lg cates-person" [title]="textLetDown">
-            <i class="fa fa-circle fa-stack-2x better-with-control"></i>
+        <span *ngIf="catesPerson.type==3" class="fa-stack fa-lg cates-person" [matTooltip]="textLetDown">
+            <i class="fa fa-circle fa-stack-2x better-with-control shadow"></i>
             <i class="fa fa-smile-o fa-stack-2x"></i>
             <i class="fa fa-ban fa-stack-2x bad-outcome"></i>
         </span>
