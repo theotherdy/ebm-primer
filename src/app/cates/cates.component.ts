@@ -1,5 +1,8 @@
 import { Component, OnInit, Input, OnChanges, SimpleChange } from '@angular/core';
 
+import {DomSanitizer} from '@angular/platform-browser';
+import {MatIconRegistry} from '@angular/material';
+
 import { CatesPerson } from './cates-person';
 
 @Component({
@@ -27,12 +30,23 @@ export class CatesComponent implements OnInit, OnChanges {
     @Input() textOK: string;
     @Input() textBad: string;
     @Input() noOfRowsAndColumns: number;
+    @Input() type: string;  //treatment or diagnosis
     
     //noOfRowsAndColumns: number;
     
     catesPeople: CatesPerson[];
     
-    constructor() { }
+    constructor(iconRegistry: MatIconRegistry, sanitizer: DomSanitizer) {
+        iconRegistry.addSvgIcon('good-because',sanitizer.bypassSecurityTrustResourceUrl('assets/icon/good-because.svg'));  
+        iconRegistry.addSvgIcon('good-despite',sanitizer.bypassSecurityTrustResourceUrl('assets/icon/good-despite.svg'));  
+        iconRegistry.addSvgIcon('bad-because',sanitizer.bypassSecurityTrustResourceUrl('assets/icon/bad-because.svg'));  
+        iconRegistry.addSvgIcon('bad-despite',sanitizer.bypassSecurityTrustResourceUrl('assets/icon/bad-despite.svg'));  
+        
+        iconRegistry.addSvgIcon('true-positive',sanitizer.bypassSecurityTrustResourceUrl('assets/icon/true-positive.svg'));  
+        iconRegistry.addSvgIcon('false-positive',sanitizer.bypassSecurityTrustResourceUrl('assets/icon/false-positive.svg'));  
+        iconRegistry.addSvgIcon('true-negative',sanitizer.bypassSecurityTrustResourceUrl('assets/icon/true-negative.svg'));  
+        iconRegistry.addSvgIcon('false-negative',sanitizer.bypassSecurityTrustResourceUrl('assets/icon/false-negative.svg'));  
+    }
 
     ngOnInit() {
         this.createPeople();    

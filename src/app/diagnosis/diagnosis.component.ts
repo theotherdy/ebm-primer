@@ -103,10 +103,19 @@ export class DiagnosisComponent implements OnInit {
     }
     
     onAdjustPrevalence() {
+        //first reset other two sliders
+        this.diagnosis.specificity = this.lastDiagnosis.specificity;
+        this.diagnosis.sensitivity = this.lastDiagnosis.sensitivity;
+        
         let adjustPrevalenceByMultiplier: number = this.adjustPrevalenceBy/100;
         //change formModel.positiveIndivDisease
         this.diagnosis.positiveIndivDisease = Math.round(this.lastDiagnosis.positiveIndivDisease + (adjustPrevalenceByMultiplier * this.lastDiagnosis.positiveIndivDisease));
-        this.diagnosis.negativeIndivDisease = Math.round((this.lastDiagnosis.negativeIndivDisease/this.lastDiagnosis.positiveIndivDisease) * this.diagnosis.positiveIndivDisease);
+        if(this.lastDiagnosis.positiveIndivDisease > 0) {
+            this.diagnosis.negativeIndivDisease = Math.round((this.lastDiagnosis.negativeIndivDisease/this.lastDiagnosis.positiveIndivDisease) * this.diagnosis.positiveIndivDisease);
+        } else {
+            this.diagnosis.negativeIndivDisease = this.lastDiagnosis.negativeIndivDisease;
+        }
+        
         this.diagnosis.negativeIndivNoDisease = Math.round(this.lastDiagnosis.specificity * (this.lastDiagnosis.totalIndiv - (this.diagnosis.positiveIndivDisease + this.diagnosis.negativeIndivDisease)));
         this.diagnosis.positiveIndivNoDisease = this.lastDiagnosis.totalIndiv - (this.diagnosis.positiveIndivDisease + this.diagnosis.negativeIndivDisease + this.diagnosis.negativeIndivNoDisease);
         
@@ -133,6 +142,10 @@ export class DiagnosisComponent implements OnInit {
     }
     
     onAdjustSensitivity() {
+        //first reset other two sliders
+        this.diagnosis.specificity = this.lastDiagnosis.specificity;
+        this.adjustPrevalenceBy = 0;
+        
         this.diagnosis.positiveIndivDisease = Math.round((this.lastDiagnosis.positiveIndivDisease + this.lastDiagnosis.negativeIndivDisease) * this.diagnosis.sensitivity);
         console.log(this.lastDiagnosis.positiveIndivDisease);
         console.log(this.lastDiagnosis.negativeIndivDisease);
@@ -161,6 +174,10 @@ export class DiagnosisComponent implements OnInit {
     }
     
     onAdjustSpecificity() {
+        //first reset other two sliders
+        this.adjustPrevalenceBy = 0;
+        this.diagnosis.sensitivity = this.lastDiagnosis.sensitivity;
+        
         this.diagnosis.positiveIndivDisease = this.lastDiagnosis.positiveIndivDisease;
         this.diagnosis.negativeIndivDisease = this.lastDiagnosis.negativeIndivDisease;
         this.diagnosis.negativeIndivNoDisease = Math.round((this.lastDiagnosis.negativeIndivNoDisease + this.lastDiagnosis.positiveIndivNoDisease) * this.diagnosis.specificity);

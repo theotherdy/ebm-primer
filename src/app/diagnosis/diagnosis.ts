@@ -1,9 +1,9 @@
 export class Diagnosis {
     //Input
-    public positiveIndivNoDisease: number = 30; //four mandatory values
-    public negativeIndivNoDisease: number = 80;
-    public positiveIndivDisease: number = 10;
-    public negativeIndivDisease: number = 90;
+    public positiveIndivNoDisease: number = 60; //four mandatory values
+    public negativeIndivNoDisease: number = 107;
+    public positiveIndivDisease: number = 34;
+    public negativeIndivDisease: number = 4;
     //Calculated
     public totalIndivNoDisease?: number;
     public totalIndivDisease?: number;

@@ -238,10 +238,10 @@
                             </mat-expansion-panel>
                         </mat-accordion>
                     </mat-tab>
-                    <mat-tab label="Cates">
+                    <mat-tab label="Pictograph">
                         <div fxLayout="row" fxLayoutAlign="center start">
                             <div fxFlex="100%" fxFlex.md="75%" fxFlex.sm="75%" fxFlex.gt-md="50%" >
-                                <cates-component *ngIf="diagnosis?.updated" [noOfGood]="noOfGood" [noOfOK]="noOfOK" [noOfLetDown]="noOfLetDown" [noOfBad]="noOfBad" [textGood]="textGood" [textOK]="textOK" [textLetDown]="textLetDown" [textBad]="textBad" [noOfRowsAndColumns]="noOfRowsAndColumns"></cates-component>
+                                <cates-component *ngIf="diagnosis?.updated" [noOfGood]="noOfGood" [noOfOK]="noOfOK" [noOfLetDown]="noOfLetDown" [noOfBad]="noOfBad" [textGood]="textGood" [textOK]="textOK" [textLetDown]="textLetDown" [textBad]="textBad" [noOfRowsAndColumns]="noOfRowsAndColumns" type="diagnosis"></cates-component>
                             </div>
                         </div>
                     </mat-tab>

@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { FormsModule }   from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -26,6 +27,7 @@ import { ChangerModule } from './changer/changer.module';
     imports: [
         BrowserModule,
         FormsModule,
+        HttpClientModule,
         AppRoutingModule,
         FlexLayoutModule,
         SharedModule,

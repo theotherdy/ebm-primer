@@ -13,24 +13,28 @@ mat-icon.size-40 {
   font-size: 40px;
 }
 
+.mat-card {
+  margin: 10px 0px 0px 10px;
+}
+
 @keyframes textThrobAnimation {
   0%   { color: #333; font-weight:normal}
-  50%  { color: #ff4081; font-weight:bolder }
+  50%  { color: #e8ab1e; font-weight:normal }
   100% { color: #333; font-weight:normal }
 }
 @-o-keyframes textThrobAnimation{
   0%   { color: #333; font-weight:normal}
-  50%  { color: #ff4081; font-weight:bolder }
+  50%  { color: #e8ab1e; font-weight:normal }
   100% { color: #333; font-weight:normal }
 }
 @-moz-keyframes textThrobAnimation{
   0%   { color: #333; font-weight:normal}
-  50%  { color: #ff4081; font-weight:bolder }
+  50%  { color: #e8ab1e; font-weight:normal }
   100% { color: #333; font-weight:normal }
 }
 @-webkit-keyframes textThrobAnimation{
   0%   { color: #333; font-weight:normal}
-  50%  { color: #ff4081; font-weight:bolder }
+  50%  { color: #e8ab1e; font-weight:normal }
   100% { color: #333; font-weight:normal }
 }
 

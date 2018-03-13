@@ -7,9 +7,12 @@ import { FlexLayoutModule } from "@angular/flex-layout";
 
 import { SharedModule } from "../shared/shared.module";
 
+import {MatCardModule} from '@angular/material/card';
+
 import { NnttComponent } from './nntt.component';
 
 import { CatesModule } from '../cates/cates.module';
+import { ChangerModule } from '../changer/changer.module';
 
 @NgModule({
     imports: [
@@ -18,7 +21,9 @@ import { CatesModule } from '../cates/cates.module';
         ReactiveFormsModule,
         FlexLayoutModule,
         SharedModule,
-        CatesModule
+        MatCardModule,
+        CatesModule,
+        ChangerModule
     ],
     declarations: [ NnttComponent ],
     exports:      [ NnttComponent ],
