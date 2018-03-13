@@ -17,12 +17,16 @@ import { CatesModule } from './cates/cates.module';
 //import { NavbarModule } from './navbar/navbar.module';
 import { NavbarComponent } from './navbar/navbar.component';
 import { ChangerModule } from './changer/changer.module';
+import { EmbeddedComponent } from './embedded/embedded.component';
+import { StandaloneComponent } from './standalone/standalone.component';
 
 
 @NgModule({
     declarations: [
         AppComponent,
         NavbarComponent,
+        EmbeddedComponent,
+        StandaloneComponent,
     ],
     imports: [
         BrowserModule,

@@ -16,30 +16,30 @@
                     <mat-card-content>
                         <form [formGroup]="diagnosisForm" (ngSubmit)="onSubmit()">
                             <div fxLayout='row' fxLayoutAlign="start start"> 
-                                <div fxFlex class="form-column">
+                                <div fxFlex="50" class="form-column">
                                     <h3>Condition</h3>
-                                    <mat-form-field class="full-width">
+                                    <mat-form-field>
                                         <input type="number" min="0" step="1" matInput required formControlName="positiveIndivDisease" name="positiveIndivDisease" placeholder="Positive test" class="full-width" [class.pulse]="positiveIndivDiseaseChanged">
                                         <mat-error>
                                             Please enter a non-negative integer
                                         </mat-error>
                                     </mat-form-field>
-                                    <mat-form-field class="full-width">
+                                    <mat-form-field>
                                         <input type="number" min="0" step="1" matInput required formControlName="negativeIndivDisease" name="negativeIndivDisease" placeholder="Negative test" class="full-width" [class.pulse]="negativeIndivDiseaseChanged"> 
                                         <mat-error>
                                             Please enter a non-negative integer
                                         </mat-error>
                                     </mat-form-field>
                                 </div>
-                                <div fxFlex fxLayout='column' class="form-column">
+                                <div fxFlex="50" class="form-column">
                                     <h3>No Condition</h3>
-                                    <mat-form-field class="full-width">
+                                    <mat-form-field>
                                         <input type="number" min="0" step="1" matInput required formControlName="positiveIndivNoDisease" name="positiveIndivNoDisease" placeholder="Positive test" class="full-width" [class.pulse]="positiveIndivNoDiseaseChanged">
                                         <mat-error>
                                             Please enter a non-negative integer
                                         </mat-error>
                                     </mat-form-field>
-                                    <mat-form-field class="full-width">
+                                    <mat-form-field>
                                         <input type="number" min="0" step="1" matInput required formControlName="negativeIndivNoDisease" name="negativeIndivNoDisease" placeholder="Negative test" class="full-width" [class.pulse]="negativeIndivNoDiseaseChanged">  
                                         <mat-error>
                                             Please enter a non-negative integer
@@ -59,7 +59,7 @@
                     <mat-card-header>
                         <div mat-card-avatar><mat-icon class="size-40">timeline</mat-icon></div>
                         <mat-card-title>2. Simulate</mat-card-title>
-                        <mat-card-subtitle>Increase or decrease with % sliders</mat-card-subtitle>
+                        <mat-card-subtitle>Increase or decrease with sliders</mat-card-subtitle>
                     </mat-card-header>
                     <mat-card-content>
                         <div fxLayout='row' fxLayout.lt-md="column" fxLayoutAlign="stretch start"> 

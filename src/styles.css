@@ -17,6 +17,10 @@ mat-icon.size-40 {
   margin: 10px 0px 0px 10px;
 }
 
+.mat-form-field-infix {
+    width: 100% !important;
+}
+
 @keyframes textThrobAnimation {
   0%   { color: #333; font-weight:normal}
   50%  { color: #e8ab1e; font-weight:normal }

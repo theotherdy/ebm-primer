@@ -1,23 +1,44 @@
 import { RouterModule, Routes, Route } from '@angular/router';
 import { NgModule } from '@angular/core';
 
+import { StandaloneComponent } from './standalone/standalone.component';
+import { EmbeddedComponent } from './embedded/embedded.component';
 import { NnttComponent } from './nntt/nntt.component';
 import { DiagnosisComponent } from './diagnosis/diagnosis.component';
 
-const indexRoute: Route = {
+/*const indexRoute: Route = {
     path: '',
-    component: NnttComponent
-}
+    redirectTo: 'nntt',
+    pathMatch: 'full'
+}*/
 
 const fallbackRoute: Route = {
     path: '**',
-    component: NnttComponent
+    redirectTo: '/nntt',
+    pathMatch: 'full'
 }
 
 const appRoutes: Routes = [
-    { path: 'nntt', component: NnttComponent },
-    { path: 'diagnosis', component: DiagnosisComponent },
-    indexRoute,
+    { 
+        path: '',
+        component: StandaloneComponent,
+        children: [
+            { path: '', component: NnttComponent },
+            { path: 'nntt', component: NnttComponent },
+            { path: 'diagnosis', component: DiagnosisComponent }
+        ]
+    },
+    { 
+        path: 'embedded',
+        component: EmbeddedComponent,
+        children: [
+            { path: 'nntt', component: NnttComponent },
+            { path: 'diagnosis', component: DiagnosisComponent }
+        ]
+    },
+    //{ path: 'nntt', component: NnttComponent },
+    //{ path: 'diagnosis', component: DiagnosisComponent },
+    //indexRoute,
     fallbackRoute
 ];
 
