@@ -36,23 +36,23 @@ export class Study {
     
     public calculate() {
         
-        this.totalIndivControl = this.eventIndivControl + this.noEventIndivControl;
-        this.totalIndivInterv = this.eventIndivInterv + this.noEventIndivInterv;
+        this.totalIndivControl = this.eventIndivControl + this.noEventIndivControl;  //CE + CNoE
+        this.totalIndivInterv = this.eventIndivInterv + this.noEventIndivInterv;  //EE + ENoE
         
         
         if(this.totalIndivControl && this.totalIndivControl>0) {
-            this.eventRateControl = this.eventIndivControl/this.totalIndivControl;
+            this.eventRateControl = this.eventIndivControl/this.totalIndivControl;  //CER
         } else {
             this.eventRateControl = 1;
         }
         if(this.totalIndivInterv && this.totalIndivInterv>0) {
-            this.eventRateInterv = this.eventIndivInterv/this.totalIndivInterv;
+            this.eventRateInterv = this.eventIndivInterv/this.totalIndivInterv;  //EER
         } else {
             this.eventRateInterv = 1;
         }
         
         if(this.eventRateControl && this.eventRateControl>0) {
-            this.relativeRisk = this.eventRateInterv/this.eventRateControl;
+            this.relativeRisk = this.eventRateInterv/this.eventRateControl;  //RR
             //console.log('calculating more');
         }
         
@@ -103,7 +103,7 @@ export class Study {
         this.oddsRatioUL95CI = Math.exp(oddsRatioNatLog+this.noOfSEsFor95CI*oddsRatioStdErrNatLog);
                         
         /* Risk */
-        this.riskDiff = this.eventRateControl-this.eventRateInterv;
+        this.riskDiff = this.eventRateControl-this.eventRateInterv;  //RD
         
         let riskDiffStdErrControlTerm: number;
         let riskDiffStdErrIntervTerm: number;

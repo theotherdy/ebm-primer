@@ -197,32 +197,22 @@
                                 <!--h3>Positive Likelihood Ratio</h3-->
                                 <p>The <em>positive likelihood ratio</em> tells us how much we should increase the probability of a condition if the test is positive.</p>
                                 Interpreting likelihood ratios (source: http://medtrain.chm.msu.edu/ebm/Diagnosis/Diagnosis6.html)
-                                <table>
-                                    <tr>
-                                        <th>LR</th>
-                                        <th>Interpretation</th>
-                                    </tr>
-                                    <tr>
-                                        <th>>10</th>
-                                        <th>Large and often conclusive increase in the likelihood of disease</th>
-                                    </tr>
-                                    <tr>
-                                        <th>5-10</th>
-                                        <th>Moderate increase in the likelihood of disease</th>
-                                    </tr>
-                                    <tr>
-                                        <th>2-5</th>
-                                        <th>Small increase in the likelihood of disease</th>
-                                    </tr>
-                                    <tr>
-                                        <th>1 - 2</th>
-                                        <th>Minimal increase in the likelihood of disease</th>
-                                    </tr>
-                                    <tr>
-                                        <th>1</th>
-                                        <th><strong>No change</strong> in the likelihood of disease</th>
-                                    </tr>
-                                </table>
+                                <mat-table #table [dataSource]="dataSource">
+                                    <!-- Name Column -->
+                                    <ng-container matColumnDef="name">
+                                        <mat-header-cell *matHeaderCellDef> Value </mat-header-cell>
+                                        <mat-cell *matCellDef="let element"> {{likelihoodRatio.value}} </mat-cell>
+                                    </ng-container>
+
+                                    <!-- Weight Column -->
+                                    <ng-container matColumnDef="weight">
+                                        <mat-header-cell *matHeaderCellDef> Interpretation </mat-header-cell>
+                                        <mat-cell *matCellDef="let element"> {{likelihoodRatio.interpretation}} </mat-cell>
+                                    </ng-container>
+
+                                    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                                    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                                </mat-table>
                             </mat-expansion-panel>
                             <mat-expansion-panel>
                                 <mat-expansion-panel-header title="-ve LR">
