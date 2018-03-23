@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="68.136505mm"
+   height="68.136505mm"
+   viewBox="0 0 241.42855 241.42856"
+   id="svg4852"
+   version="1.1"
+   inkscape:version="0.91 r13725"
+   sodipodi:docname="IconTruePositive.svg">
+  <defs
+     id="defs4854" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.35"
+     inkscape:cx="1881.4281"
+     inkscape:cy="-1097.8575"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     inkscape:window-width="1920"
+     inkscape:window-height="1116"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata4857">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(1933.571,806.92393)">
+    <g
+       transform="translate(-2317.8568,-962.50044)"
+       id="g4200">
+      <circle
+         r="120.71429"
+         cy="277.00507"
+         cx="507.14285"
+         id="path4136-3-2"
+         style="fill:#002147;fill-opacity:1;stroke:none;stroke-width:20.01199913;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <g
+         id="g4935"
+         transform="matrix(1.182222,0,0,1.182222,-123.36975,-102.89492)">
+        <rect
+           style="fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:20.01199913;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           id="rect4227-7"
+           width="99.285706"
+           height="23.214285"
+           x="465.35715"
+           y="273.43365"
+           ry="11.607142" />
+        <rect
+           transform="matrix(-0.00829578,0.99996559,-0.99996559,-0.00829578,0,0)"
+           style="fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:20.01199913;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           id="rect4227-7-0"
+           width="99.285706"
+           height="23.214285"
+           x="231.12173"
+           y="-528.23975"
+           ry="11.607142" />
+      </g>
+      <g
+         id="g4935-2"
+         transform="matrix(1.182222,0,0,1.182222,-80.747128,-18.468687)">
+        <rect
+           style="fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:20.01199913;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           id="rect4227-7-06"
+           width="99.285706"
+           height="23.214285"
+           x="465.35715"
+           y="273.43365"
+           ry="11.607142" />
+        <rect
+           transform="matrix(-0.00829578,0.99996559,-0.99996559,-0.00829578,0,0)"
+           style="fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:20.01199913;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           id="rect4227-7-0-6"
+           width="99.285706"
+           height="23.214285"
+           x="231.12173"
+           y="-528.23975"
+           ry="11.607142" />
+      </g>
+    </g>
+  </g>
+</svg>
