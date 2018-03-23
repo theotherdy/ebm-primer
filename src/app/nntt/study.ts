@@ -1,9 +1,9 @@
 export class Study {
     //Input
-    public eventIndivControl: number = 30; //four mandatory values
-    public noEventIndivControl: number = 80;
-    public eventIndivInterv: number = 10;
-    public noEventIndivInterv: number = 90;
+    public eventIndivControl: number = 27; //four mandatory values
+    public noEventIndivControl: number = 128;
+    public eventIndivInterv: number = 22;
+    public noEventIndivInterv: number = 140;
     //Calculated
     public totalIndivControl?: number; //? = optional
     public totalIndivInterv?: number;

@@ -45,3 +45,17 @@ mat-icon.size-40 {
 .pulse {
     animation: textThrobAnimation 1s infinite;
 }
+
+.source {
+  margin: 2em 0 0 0;
+  text-align: center;
+  font-size: 0.8em;
+}
+
+.knocked-back {
+  color: #ccc;
+}
+
+.knocked-back a {
+  color: #ccc !important;
+}

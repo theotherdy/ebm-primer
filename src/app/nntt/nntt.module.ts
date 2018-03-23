@@ -8,6 +8,8 @@ import { FlexLayoutModule } from "@angular/flex-layout";
 import { SharedModule } from "../shared/shared.module";
 
 import {MatCardModule} from '@angular/material/card';
+import {MatSliderModule} from '@angular/material/slider';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 import { NnttComponent } from './nntt.component';
 
@@ -22,6 +24,8 @@ import { ChangerModule } from '../changer/changer.module';
         FlexLayoutModule,
         SharedModule,
         MatCardModule,
+        MatSliderModule,
+        MatTooltipModule,
         CatesModule,
         ChangerModule
     ],
