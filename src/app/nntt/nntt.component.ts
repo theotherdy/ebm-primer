@@ -148,6 +148,25 @@ export class NnttComponent implements OnInit {
         this.simulated = true;
     }
     
+    onReset() {
+        this.adjustPrevalenceBy = 100;
+        //this.diagnosis = Object.assign({}, this.lastDiagnosis); 
+        this.study.eventIndivControl = this.lastStudy.eventIndivControl;
+        this.study.noEventIndivControl = this.lastStudy.noEventIndivControl;
+        this.study.eventIndivInterv = this.lastStudy.eventIndivInterv;
+        this.study.noEventIndivInterv = this.lastStudy.noEventIndivInterv;
+        this.study.eventRateControl = this.lastStudy.eventRateControl;
+        this.study.eventRateInterv = this.lastStudy.eventRateInterv;
+        
+        this.upDate2x2();
+        this.updateValuesForCates();
+        
+        this.study.calculate();
+        this.calculated = true;
+        this.simulated = false;
+        
+    }
+    
     upDate2x2() {
         this.studyForm.patchValue({
             eventIndivControl: this.study.eventIndivControl,
