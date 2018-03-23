@@ -8,21 +8,30 @@ import { isIntegerValidator } from '../shared/integer-validator.directive';
 import {MatTableDataSource} from '@angular/material';
 
 export interface LikelihoodRatio {
-  position: number;
-  lr: string;
-  interpretation: string;
+    position: number;
+    value: string;
+    probability: string;
+    interpretation: string;
 }
 
-const RATIO_DATA: LikelihoodRatio[] = [
-    {position: 1, value: '>10', interpretation: 'Large and often conclusive increase in the likelihood of disease'},
-    {position: 2, value: '5-10', interpretation: 'Moderate increase in the likelihood of disease'},
-    {position: 3, value: '2-5', interpretation: 'Small increase in the likelihood of disease'},
-    {position: 4, value: '1-2', interpretation: 'Minimal increase in the likelihood of disease'},
-    {position: 5, value: '1', interpretation: 'No change in the likelihood of disease'},
-    {position: 6, value: '0.5-1.0', interpretation: 'Minimal decrease in the likelihood of disease'},
-    {position: 7, value: '0.2-0.5', interpretation: 'Small decrease in the likelihood of disease'},
-    {position: 8, value: '0.1-0.2', interpretation: 'Moderate decrease in the likelihood of disease'},
-    {position: 9, value: '<0.1', interpretation: 'Large and often conclusive decrease in the likelihood of disease'},
+const POSITIVE_RATIO_DATA: LikelihoodRatio[] = [
+    {position: 1, value: '10', probability: '45%', interpretation: 'Large increase in the likelihood of disease'},
+    {position: 2, value: '5', probability: '30%', interpretation: 'Moderate increase in the likelihood of disease'},
+    {position: 3, value: '2', probability: '15%', interpretation: 'Slight increase in the likelihood of disease'},
+    {position: 5, value: '1', probability: '0%', interpretation: 'No change in the likelihood of disease'},
+    {position: 6, value: '0.5', probability: '-15%', interpretation: 'Slight decrease in the likelihood of disease'},
+    {position: 7, value: '0.2', probability: '-30%', interpretation: 'Moderate decrease in the likelihood of disease'},
+    {position: 8, value: '0.1', probability: '-45%', interpretation: 'Large decrease in the likelihood of disease'},
+];
+
+const NEGATIVE_RATIO_DATA: LikelihoodRatio[] = [
+    {position: 1, value: '10', probability: '-45%', interpretation: 'Large decrease in the likelihood of disease'},
+    {position: 2, value: '5', probability: '-30%', interpretation: 'Moderate decrease in the likelihood of disease'},
+    {position: 3, value: '2', probability: '-15%', interpretation: 'Slight decrease in the likelihood of disease'},
+    {position: 5, value: '1', probability: '0%', interpretation: 'No change in the likelihood of disease'},
+    {position: 6, value: '0.5', probability: '15%', interpretation: 'Slight increase in the likelihood of disease'},
+    {position: 7, value: '0.2', probability: '30%', interpretation: 'Moderate increase in the likelihood of disease'},
+    {position: 8, value: '0.1', probability: '45%', interpretation: 'Large increase in the likelihood of disease'},
 ];
 
 
@@ -61,8 +70,9 @@ export class DiagnosisComponent implements OnInit {
     calculated: boolean = false; //tracking whether calculate button has been pressed
     simulated: boolean = false; //tracking whether simulation sliders have ben used
     
-    dataSource = RATIO_DATA;
-    displayedColumns = ['value', 'interpretation'];
+    negativeDataSource = NEGATIVE_RATIO_DATA;
+    positiveDataSource = POSITIVE_RATIO_DATA;
+    displayedColumns = ['value', 'probability', 'interpretation'];
     
     //formModel: any;
 

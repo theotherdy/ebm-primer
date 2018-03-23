@@ -196,23 +196,24 @@
                                 </mat-expansion-panel-header>
                                 <!--h3>Positive Likelihood Ratio</h3-->
                                 <p>The <em>positive likelihood ratio</em> tells us how much we should increase the probability of a condition if the test is positive.</p>
-                                Interpreting likelihood ratios (source: http://medtrain.chm.msu.edu/ebm/Diagnosis/Diagnosis6.html)
-                                <mat-table #table [dataSource]="dataSource">
-                                    <!-- Name Column -->
-                                    <ng-container matColumnDef="name">
-                                        <mat-header-cell *matHeaderCellDef> Value </mat-header-cell>
-                                        <mat-cell *matCellDef="let element"> {{likelihoodRatio.value}} </mat-cell>
+                                <mat-table #table [dataSource]="positiveDataSource">
+                                    <ng-container matColumnDef="value">
+                                        <mat-header-cell *matHeaderCellDef> Likelihood Ratio </mat-header-cell>
+                                        <mat-cell *matCellDef="let likelihoodRatio"> {{likelihoodRatio.value}} </mat-cell>
                                     </ng-container>
-
-                                    <!-- Weight Column -->
-                                    <ng-container matColumnDef="weight">
-                                        <mat-header-cell *matHeaderCellDef> Interpretation </mat-header-cell>
-                                        <mat-cell *matCellDef="let element"> {{likelihoodRatio.interpretation}} </mat-cell>
+                                    <ng-container matColumnDef="probability">
+                                        <mat-header-cell *matHeaderCellDef> Appox. change in probability </mat-header-cell>
+                                        <mat-cell *matCellDef="let likelihoodRatio"> {{likelihoodRatio.probability}} </mat-cell>
+                                    </ng-container>
+                                    <ng-container matColumnDef="interpretation">
+                                        <mat-header-cell *matHeaderCellDef> Post-test probability of disease </mat-header-cell>
+                                        <mat-cell *matCellDef="let likelihoodRatio"> {{likelihoodRatio.interpretation}} </mat-cell>
                                     </ng-container>
 
                                     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
                                     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
                                 </mat-table>
+                                <p class="knocked-back source">Source: Wkipedia <a href="https://en.wikipedia.org/wiki/Likelihood_ratios_in_diagnostic_testing" target="_blank">https://en.wikipedia.org/wiki/Likelihood_ratios_in_diagnostic_testing</a></p>
                             </mat-expansion-panel>
                             <mat-expansion-panel>
                                 <mat-expansion-panel-header title="-ve LR">
@@ -224,7 +225,25 @@
                                     </mat-panel-description>
                                 </mat-expansion-panel-header>
                                 <!--h3>Negative Likelihood Ratio</h3-->
-                                <p>The <em>negative likelihood ratio</em> tells us how much we should increase the probability of a condition if the test is positive.</p>
+                                <p>The <em>negative likelihood ratio</em> tells us how much we should decrease the probability of a condition if the test is negative.</p>
+                                <mat-table #table [dataSource]="negativeDataSource">
+                                    <ng-container matColumnDef="value">
+                                        <mat-header-cell *matHeaderCellDef> Likelihood Ratio </mat-header-cell>
+                                        <mat-cell *matCellDef="let likelihoodRatio"> {{likelihoodRatio.value}} </mat-cell>
+                                    </ng-container>
+                                    <ng-container matColumnDef="probability">
+                                        <mat-header-cell *matHeaderCellDef> Appox. change in probability </mat-header-cell>
+                                        <mat-cell *matCellDef="let likelihoodRatio"> {{likelihoodRatio.probability}} </mat-cell>
+                                    </ng-container>
+                                    <ng-container matColumnDef="interpretation">
+                                        <mat-header-cell *matHeaderCellDef> Post-test probability of disease </mat-header-cell>
+                                        <mat-cell *matCellDef="let likelihoodRatio"> {{likelihoodRatio.interpretation}} </mat-cell>
+                                    </ng-container>
+
+                                    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                                    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                                </mat-table>
+                                <p class="knocked-back source">Source: Wkipedia <a href="https://en.wikipedia.org/wiki/Likelihood_ratios_in_diagnostic_testing" target="_blank">https://en.wikipedia.org/wiki/Likelihood_ratios_in_diagnostic_testing</a></p>
                             </mat-expansion-panel>
                         </mat-accordion>
                     </mat-tab>
