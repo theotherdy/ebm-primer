@@ -59,3 +59,7 @@ mat-icon.size-40 {
 .knocked-back a {
   color: #ccc !important;
 }
+
+.header-no-top-margin{
+  margin-top: 0px;
+}

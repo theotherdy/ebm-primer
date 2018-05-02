@@ -91,21 +91,21 @@ export class NnttComponent implements OnInit {
         this.lastStudy.eventRateControl = this.study.eventRateControl;
         this.lastStudy.eventRateInterv = this.study.eventRateInterv;
         
-        console.log(this.study.eventRateControl);
-        console.log(this.study.eventRateInterv);
+        //console.log(this.study.eventRateControl);
+        //console.log(this.study.eventRateInterv);
         
         //now need to calculate maximum values for the prevalence slider
         //as neither eventRateControl nor eventRateInterv can be allowed to be > 1
         let reciprocalEventRateControl = 1/this.study.eventRateControl;
         let reciprocalEventRateInterv = 1/this.study.eventRateInterv;
         
-        console.log(reciprocalEventRateControl);
-        console.log(reciprocalEventRateInterv);
+        //console.log(reciprocalEventRateControl);
+        //console.log(reciprocalEventRateInterv);
         
         this.maxAdjustPrevalenceBy = (Math.floor(Math.min(reciprocalEventRateControl,reciprocalEventRateInterv)*10)/10)*100;
         this.maxAdjustPrevalenceBy = Math.min(1000,this.maxAdjustPrevalenceBy)
         
-        console.log(this.maxAdjustPrevalenceBy);
+        //console.log(this.maxAdjustPrevalenceBy);
     }
     
     onAdjustPrevalence() {
@@ -126,9 +126,11 @@ export class NnttComponent implements OnInit {
         console.log(this.study.eventRateControl);
         console.log(this.study.eventRateInterv);
         
-        
-        this.study.eventIndivControl = Math.round((this.study.eventRateControl * this.lastStudy.noEventIndivControl)/(1-this.study.eventRateControl));
-        this.study.eventIndivInterv = Math.round((this.study.eventRateInterv * this.lastStudy.noEventIndivInterv)/(1-this.study.eventRateInterv));
+        //allowing non-integer values whe simulating
+        this.study.eventIndivControl = (this.study.eventRateControl * this.lastStudy.noEventIndivControl)/(1-this.study.eventRateControl);
+        this.study.eventIndivInterv = (this.study.eventRateInterv * this.lastStudy.noEventIndivInterv)/(1-this.study.eventRateInterv);
+        //this.study.eventIndivControl = Math.round((this.study.eventRateControl * this.lastStudy.noEventIndivControl)/(1-this.study.eventRateControl));
+        //this.study.eventIndivInterv = Math.round((this.study.eventRateInterv * this.lastStudy.noEventIndivInterv)/(1-this.study.eventRateInterv));
                 
         this.upDate2x2();
         

@@ -1,101 +1,117 @@
-<!--mat-tab-group class="">
-    <mat-tab label="Basic">
-        <div class="demo-tab-content">
-            Some sort of wizard
-        </div>
-    </mat-tab>
-    <mat-tab label="Advanced"-->
-        <div fxLayout='row' fxLayout.lt-md="column" fxLayoutAlign="start start">
-            <div fxFlex="33%" class="input-column">
-                <mat-card class="example-card">
-                    <mat-card-header>
-                        <div mat-card-avatar><mat-icon class="size-40">keyboard</mat-icon></div>
-                        <mat-card-title>1. Calculate</mat-card-title>
-                        <mat-card-subtitle>Enter data and calculate</mat-card-subtitle>
-                    </mat-card-header>
-                    <mat-card-content>
+<div class="page-wrapper">
+    <div fxLayout="column" fxLayoutAlign="start stretch">
+        <div fxFlex="nogrow">
+            <mat-card>
+                <!--mat-card-header>
+                    <div mat-card-avatar><mat-icon class="size-40">keyboard</mat-icon></div>
+                    <mat-card-title>1. Calculate</mat-card-title>
+                    <mat-card-subtitle>Enter data and calculate</mat-card-subtitle>
+                </mat-card-header-->
+                <mat-card-content>
+                    <div fxLayout='row' fxLayout.lt-sm="column">
                         <form [formGroup]="studyForm" (ngSubmit)="onSubmit()">
-                            <div fxLayout='row' fxLayoutAlign="start start"> 
-                                <div fxFlex fxLayout='column' class="form-column">
-                                    <h3>Event</h3>
-                                    <mat-form-field class="full-width">
-                                        <input type="number" min="0" step="1" matInput required formControlName="eventIndivInterv" name="eventIndivInterv" placeholder="Intervention" class="full-width" [class.pulse]="eventIndivIntervChanged">
-                                        <mat-error>
-                                            Please enter a non-negative integer
-                                        </mat-error>
-                                    </mat-form-field>
-                                    <mat-form-field class="full-width">
-                                        <input type="number" min="0" step="1" matInput required formControlName="eventIndivControl" name="eventIndivControl" placeholder="Control" class="full-width" [class.pulse]="eventIndivControlChanged">
-                                        <mat-error>
-                                            Please enter a non-negative integer
-                                        </mat-error>
-                                    </mat-form-field>
-                                </div>
-                                <div fxFlex class="form-column">
-                                    <h3>No event</h3>
-
-                                    <mat-form-field class="full-width">
-                                        <input type="number" min="0" step="1" matInput required formControlName="noEventIndivInterv" name="noEventIndivInterv" placeholder="Intervention" class="full-width"> 
-                                        <mat-error>
-                                            Please enter a non-negative integer
-                                        </mat-error>
-                                    </mat-form-field>
-                                    <mat-form-field class="full-width">
-                                        <input type="number" min="0" step="1" matInput required formControlName="noEventIndivControl" name="noEventIndivControl" placeholder="Control" class="full-width">  
-                                        <mat-error>
-                                            Please enter a non-negative integer
-                                        </mat-error>
-                                    </mat-form-field>
+                            <div fxFlex="200px" class="card-header">
+                                <h1 class="header-no-top-margin">Calculate</h1>
+                            </div>
+                            <div fxFlex class="card-content">
+                                <div fxLayout='row' fxLayoutAlign="start start"> 
+                                    <div fxFlex fxLayout='column' class="form-column">
+                                        <h3 class="header-no-top-margin">Event</h3>
+                                        <mat-form-field *ngIf="!simulated" class="full-width">
+                                            <input type="number" min="0" step="1" matInput required formControlName="eventIndivInterv" name="eventIndivInterv" placeholder="Intervention" class="full-width" [class.pulse]="eventIndivIntervChanged">
+                                            <mat-error>
+                                                Please enter a non-negative integer
+                                            </mat-error>
+                                        </mat-form-field>
+                                        <div *ngIf="simulated" class="full-width simulated-wrapper">
+                                            <div class="simulated-value-header">Intervention (simulated)</div>
+                                            <div class="simulated-value"><changer-component [value]="this.study.eventIndivInterv | number:'1.1-3'"></changer-component></div>
+                                        </div>
+                                        <mat-form-field *ngIf="!simulated" class="full-width">
+                                            <input type="number" min="0" step="1" matInput required formControlName="eventIndivControl" name="eventIndivControl" placeholder="Control" class="full-width" [class.pulse]="eventIndivControlChanged">
+                                            <mat-error>
+                                                Please enter a non-negative integer
+                                            </mat-error>
+                                        </mat-form-field>
+                                        <div *ngIf="simulated" class="full-width simulated-wrapper">
+                                            <div class="simulated-value-header">Control (simulated)</div>
+                                            <div class="simulated-value"><changer-component [value]="this.study.eventIndivControl | number:'1.1-3'"></changer-component></div>
+                                        </div>
+                                    </div>
+                                    <div fxFlex class="form-column">
+                                        <h3 class="header-no-top-margin">No event</h3>
+                                        <mat-form-field  *ngIf="!simulated" class="full-width">
+                                            <input type="number" min="0" step="1" matInput required formControlName="noEventIndivInterv" name="noEventIndivInterv" placeholder="Intervention" class="full-width"> 
+                                            <mat-error>
+                                                Please enter a non-negative integer
+                                            </mat-error>
+                                        </mat-form-field>
+                                        <div *ngIf="simulated" class="full-width simulated-wrapper">
+                                            <div class="simulated-value-header">Intervention (simulated)</div>
+                                            <div class="simulated-value"><changer-component [value]="this.study.noEventIndivInterv | number:'1.1-3'"></changer-component></div>
+                                        </div>
+                                        <mat-form-field  *ngIf="!simulated" class="full-width">
+                                            <input type="number" min="0" step="1" matInput required formControlName="noEventIndivControl" name="noEventIndivControl" placeholder="Control" class="full-width">  
+                                            <mat-error>
+                                                Please enter a non-negative integer
+                                            </mat-error>
+                                        </mat-form-field>
+                                        <div *ngIf="simulated" class="full-width simulated-wrapper">
+                                            <div class="simulated-value-header">Control (simulated)</div>
+                                            <div class="simulated-value"><changer-component [value]="this.study.noEventIndivControl | number:'1.1-3'"></changer-component></div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <div fxLayout='row' fxLayoutAlign="end start">
-                                <div fxFlex="nogrow" class="button-container">
-                                    <button mat-raised-button type="submit" [disabled]="!studyForm.valid" class="btn btn-success" color="accent">Calculate<!--mat-icon>done</mat-icon--></button>
-                                </div>
+                            <div class="button-container">
+                                <button mat-fab type="submit" [disabled]="!studyForm.valid || simulated" class="btn btn-success" color="accent"><mat-icon>keyboard</mat-icon></button>
                             </div>
                         </form>
-                    </mat-card-content>
-                </mat-card>
-                <mat-card class="example-card">
-                    <mat-card-header>
-                        <div mat-card-avatar><mat-icon class="size-40">timeline</mat-icon></div>
-                        <mat-card-title>2. Simulate</mat-card-title>
-                        <mat-card-subtitle>Increase or decrease with slider to demonstrate how different raw data would affect the statistics</mat-card-subtitle>
-                    </mat-card-header>
-                    <mat-card-content>
-                        <div fxLayout='row' fxLayout.lt-md="column" fxLayoutAlign="stretch start"> 
-                            <div fxFlex="33">
-                                Prevalence (%):
-                            </div>
-                            <div fxFlex="67">
-                                <mat-slider 
-                                    class="full-width" 
-                                    min="1" 
-                                    [max]="maxAdjustPrevalenceBy" 
-                                    step="10" 
-                                    [(ngModel)]="adjustPrevalenceBy"
-                                    thumbLabel 
-                                    [disabled]="!calculated"
-                                    (change)="onAdjustPrevalence()"
-                                    >
-                                </mat-slider>
-                            </div>
-                            <div fxFlex="nogrow">
-                                <mat-icon matTooltip="Drag to increase or decrease prevalence of event in the population - 100% is current value">help_outline</mat-icon>
-                            </div>
+                    </div>
+                </mat-card-content>
+            </mat-card>
+        </div>
+        <div fxFlex="nogrow">
+            <mat-card>
+                <mat-card-content>
+                    <div fxLayout='row' fxLayout.lt-sm="column">
+                        <div fxFlex="200px" class="card-header">
+                            <h1 class="header-no-top-margin">Simulate</h1>
                         </div>
-                        <div fxLayout='row' fxLayoutAlign="end start">
-                                <div fxFlex="nogrow" class="button-container">
-                                    <button mat-raised-button [disabled]="!(calculated && simulated)" class="btn btn-success" color="accent" (click)="onReset()">Reset<!--mat-icon>done</mat-icon--></button>
+                        <div fxFlex class="card-content">
+                            <div fxFlex fxLayout='row' fxLayout.lt-sm="column" fxLayoutAlign="space-between start" class="slider-container"> 
+                                <div fxFlex="33">
+                                    Prevalence (%):
+                                </div>
+                                <div fxFlex="67">
+                                    <mat-slider 
+                                        class="full-width" 
+                                        min="1" 
+                                        [max]="maxAdjustPrevalenceBy" 
+                                        step="10" 
+                                        [(ngModel)]="adjustPrevalenceBy"
+                                        [ngModelOptions]="{standalone: true}"
+                                        thumbLabel 
+                                        [disabled]="!calculated"
+                                        (change)="onAdjustPrevalence()"
+                                        >
+                                    </mat-slider>
+                                </div>
+                                <div fxFlex="nogrow">
+                                    <mat-icon matTooltip="Drag to increase or decrease prevalence of event in the population - 100% is current value">help_outline</mat-icon>
                                 </div>
                             </div>
-                    </mat-card-content>
-                </mat-card>
-            </div>
-            <div fxFlex="67%" class="results-column"> 
-                <mat-tab-group class="results-tab-group">
-                    <mat-tab label="Results">
-                        <!--h3>Results</h3-->
+                            <div class="button-container">
+                                <button mat-fab [disabled]="!(calculated && simulated)" class="btn btn-success" color="accent" (click)="onReset()"><mat-icon>replay</mat-icon></button>
+                            </div>
+                        </div>
+                    </div>
+                </mat-card-content>
+            </mat-card>
+        </div>
+        
+                <div fxLayout='row' fxLayout.lt-sm="column" class="results-panel"> 
+                    <div fxFlex="50">
                         <mat-accordion>
                             <mat-expansion-panel>
                                 <mat-expansion-panel-header title="Risk Difference">
@@ -197,36 +213,20 @@
                                 </mat-expansion-panel-header>
                                 <!--h3>Number Needed to Treat</h3-->
                                 <p><em>Number Needed to Treat</em> (NNT) is the number of patients, on average, who need to be treated to prevent one bad outcome. It is the inverse of the Risk Difference (RD = {{study?.riskDiff | number:'1.2-2'}}): NNT=1/RD ({{study?.numberNtt | number:'1.1-1'}} = 1 / {{study?.riskDiff | number:'1.2-2'}}</p>
-                                <!--div fxLayout='row' fxLayoutAlign="center top">
-                                    <div fxFlex="20%" class="number-ll">Lower 95% CI</div>
-                                    <div fxFlex="20%" class="number-mean">Number Needed to Treat</div>
-                                    <div fxFlex="20%" class="number-ul">Upper 95% CI</div>
-                                </div>
-                                <div fxLayout='row' fxLayoutAlign="center bottom">
-                                    <div fxFlex="30%" class="left-whisker-top"></div>
-                                    <div fxFlex="30%" class="right-whisker-top"></div>
-                                </div>
-                                <div fxLayout='row' fxLayoutAlign="center top">
-                                    <div fxFlex="30%" class="left-whisker-bottom"></div>
-                                    <div fxFlex="30%" class="right-whisker-bottom"></div>
-                                </div>
-                                <div fxLayout='row' fxLayoutAlign="center top">
-                                    <div fxFlex="20%" class="number-ll">{{study?.numberNttLL95CI | number:'1.1-1'}}</div>
-                                    <div fxFlex="20%" class="number-mean">{{study?.numberNtt | number:'1.1-1'}}</div>
-                                    <div fxFlex="20%" class="number-ul">{{study?.numberNttUL95CI | number:'1.1-1'}}</div>
-                                </div-->
                             </mat-expansion-panel>
                         </mat-accordion>
-                    </mat-tab>
-                    <mat-tab label="Pictogram">
-                        <div fxLayout="row" fxLayoutAlign="center start">
-                            <div fxFlex="100%" fxFlex.md="75%" fxFlex.sm="75%" fxFlex.gt-md="50%" >
-                                <cates-component *ngIf="study?.updated" [noOfGood]="noOfGood" [noOfOK]="noOfOK" [noOfLetDown]="noOfLetDown" [noOfBad]="noOfBad" [textGood]="textGood" [textOK]="textOK" [textLetDown]="textLetDown" [textBad]="textBad" [noOfRowsAndColumns]="noOfRowsAndColumns" type="treatment"></cates-component>
-                            </div>
-                        </div>
-                    </mat-tab>
-                </mat-tab-group>
-            </div>
-        </div>  
-    <!--/mat-tab>
-</mat-tab-group-->
+                    </div>  
+                    
+                    <div fxFlex="50" fxLayout="row" fxLayoutAlign="center center">
+                        <!--mat-card>
+                            <mat-card-content-->
+                                <div fxFlex="100%" fxFlex.md="75%" fxFlex.sm="75%" fxFlex.gt-md="50%" >
+                                    <cates-component *ngIf="study?.updated" [noOfGood]="noOfGood" [noOfOK]="noOfOK" [noOfLetDown]="noOfLetDown" [noOfBad]="noOfBad" [textGood]="textGood" [textOK]="textOK" [textLetDown]="textLetDown" [textBad]="textBad" [noOfRowsAndColumns]="noOfRowsAndColumns" type="treatment"></cates-component>
+                                </div>
+                            <!--/mat-card-content>
+                        </mat-card-->
+                    </div>
+                </div>
+        
+    </div>  
+</div>
