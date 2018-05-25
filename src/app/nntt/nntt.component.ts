@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { MediaChange, ObservableMedia } from "@angular/flex-layout";
 
 import { Study } from './study';
 
@@ -38,7 +39,13 @@ export class NnttComponent implements OnInit {
     eventIndivControlChanged:boolean = false;
     eventIndivIntervChanged:boolean = false;
     
-    constructor() { }
+    isMobileView: boolean = false;
+    subscriptionMedia: any;
+    sliderVertical: boolean = true;
+    
+    constructor(
+        public media: ObservableMedia
+        ) { }
 
     ngOnInit() {
         this.study = new Study();
@@ -70,6 +77,17 @@ export class NnttComponent implements OnInit {
                 ]
             )
         });
+        
+        //checking whether on mobile or desktop for full-text panel
+        this.isMobileView = this.media.isActive('xs');// || this.media.isActive('md'));// || this.media.isActive('lg'));
+        this.subscriptionMedia = this.media.subscribe((change:MediaChange) => {
+            this.isMobileView = change.mqAlias === 'xs';// || change.mqAlias === 'md');//  || change.mqAlias === 'lg');
+            if(this.isMobileView) {
+                this.sliderVertical = false;
+            } else {
+                this.sliderVertical = true;
+            }
+        }); 
     }
     
     onSubmit() {

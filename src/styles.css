@@ -22,23 +22,24 @@ mat-icon.size-40 {
 }
 
 @keyframes textThrobAnimation {
-  0%   { color: #333; font-weight:normal}
-  50%  { color: #e8ab1e; font-weight:normal }
+  /*0%   { color: #333; font-weight:normal}*/
+  0%  { color: #ff2222; font-weight:normal }
+  70%  { color: #e8ab1e; font-weight:normal }
   100% { color: #333; font-weight:normal }
 }
 @-o-keyframes textThrobAnimation{
-  0%   { color: #333; font-weight:normal}
-  50%  { color: #e8ab1e; font-weight:normal }
+  0%  { color: #ff2222; font-weight:normal }
+  70%  { color: #e8ab1e; font-weight:normal }
   100% { color: #333; font-weight:normal }
 }
 @-moz-keyframes textThrobAnimation{
-  0%   { color: #333; font-weight:normal}
-  50%  { color: #e8ab1e; font-weight:normal }
+  0%  { color: #ff2222; font-weight:normal }
+  70%  { color: #e8ab1e; font-weight:normal }
   100% { color: #333; font-weight:normal }
 }
 @-webkit-keyframes textThrobAnimation{
-  0%   { color: #333; font-weight:normal}
-  50%  { color: #e8ab1e; font-weight:normal }
+  0%  { color: #ff2222; font-weight:normal }
+  70%  { color: #e8ab1e; font-weight:normal }
   100% { color: #333; font-weight:normal }
 }
 
@@ -62,4 +63,98 @@ mat-icon.size-40 {
 
 .header-no-top-margin{
   margin-top: 0px;
+}
+
+.header-no-bottom-margin{
+  margin-bottom: 0px;
+}
+
+/*Styles for input tables and results drop-downs */
+th, td {
+  border-bottom: 1px solid rgba(0,0,0,0.12);
+}
+
+th.cell-left-vertical, td.cell-left-vertical {
+  border-left: 1px solid rgba(0,0,0,0.12); 
+}
+
+td.form-table-column {
+  padding: 5px 0px 0 0;
+}
+
+th.row-header {
+  padding: 0 10px 0 0;
+  width: 91px;
+}
+
+table { 
+    border-spacing: 0px;
+    border-collapse: separate;
+    width: 100%;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.results-panel{
+  margin: 10px 0px 0px 10px;
+}
+
+/*.simulated-wrapper {
+  padding-bottom: 17.5px;
+  min-width: 87px;
+}*/
+
+@media only screen and (max-width: 373px) {
+    .simulated-wrapper {
+      padding: 0 5px 17.5px 0px;
+    }
+}
+@media only screen and (min-width: 374px) {
+    .simulated-wrapper {
+      padding-bottom: 17.5px;
+      min-width: 87px;
+      width: 100%;
+    }
+}
+
+form {
+  width: 100%;
+}
+
+@media only screen and (max-width: 599px) {
+  .slider-container {
+    width: 100%;
+  }
+  .slider-column {
+    margin-top: 25px;
+  }
+}
+@media only screen and (min-width: 600px) {
+  .card-column {
+    height: 150px;
+  }
+  .slider-container {
+    min-width: 112px;
+  }
+}
+
+.simulated-value {
+  padding: 17px 0px 6px 0px;
+  /*border-bottom: 1px solid rgba(0, 0, 0, 0.42);*/
+  width: 100%;
+  text-align: center;
+}
+
+.header-slider {
+  font-size: 14px;
+}
+
+.fixed-width-title {
+  width: 150px;
+}
+
+.mat-expansion-panel-header-description {
+  color: #444 ! important;
 }

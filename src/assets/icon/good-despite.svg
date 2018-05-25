@@ -15,7 +15,7 @@
    id="svg4852"
    version="1.1"
    inkscape:version="0.91 r13725"
-   sodipodi:docname="IconGoodDespite.svg">
+   sodipodi:docname="good-despite.svg">
   <defs
      id="defs4854" />
   <sodipodi:namedview
@@ -26,8 +26,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.35"
-     inkscape:cx="746.42859"
-     inkscape:cy="-378.57143"
+     inkscape:cx="-231.42855"
+     inkscape:cy="-9.2857178"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -35,9 +35,9 @@
      fit-margin-left="0"
      fit-margin-right="0"
      fit-margin-bottom="0"
-     inkscape:window-width="1920"
-     inkscape:window-height="1116"
-     inkscape:window-x="-8"
+     inkscape:window-width="1680"
+     inkscape:window-height="997"
+     inkscape:window-x="1912"
      inkscape:window-y="-8"
      inkscape:window-maximized="1" />
   <metadata
@@ -56,35 +56,35 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(798.57145,87.637811)">
+     transform="translate(247.85717,-281.64789)">
     <g
-       id="g4229"
-       transform="translate(-855.71431,-243.92859)">
+       id="g4229-6"
+       transform="translate(-305.00003,125.35711)">
       <circle
          r="120.71429"
          cy="277.00507"
          cx="177.85715"
-         id="path4136"
-         style="fill:#e8ab1e;fill-opacity:1;stroke:none;stroke-width:20.01199913;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+         id="path4136-40"
+         style="fill:#f5cf47;fill-opacity:1;stroke:none;stroke-width:20.01199913;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
       <g
          transform="matrix(1.1810527,0,0,1.1810527,-35.997759,-41.613061)"
-         id="g4155">
+         id="g4155-2">
         <circle
            style="fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:20.01199913;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-           id="path4138"
+           id="path4138-9"
            cx="137.85715"
            cy="238.43362"
            r="17.857143" />
         <circle
            style="fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:20.01199913;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-           id="path4138-8"
+           id="path4138-8-1"
            cx="224.28572"
            cy="238.43362"
            r="17.857143" />
       </g>
       <path
          inkscape:connector-curvature="0"
-         id="path4161"
+         id="path4161-7"
          d="m 100.49484,316.29102 a 87.142853,87.142853 0 0 0 77.39062,47.14257 87.142853,87.142853 0 0 0 77.33399,-47.14257 l -154.72461,0 z"
          style="fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:20.01199913;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
     </g>
