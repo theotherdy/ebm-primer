@@ -1,11 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterContentInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { MediaChange, ObservableMedia } from "@angular/flex-layout";
 
 import { Diagnosis } from './diagnosis';
 
 import { isIntegerValidator } from '../shared/integer-validator.directive';
 
 import {MatTableDataSource} from '@angular/material';
+
+import * as d3 from 'd3';
 
 export interface LikelihoodRatio {
     position: number;
@@ -40,12 +43,12 @@ const NEGATIVE_RATIO_DATA: LikelihoodRatio[] = [
     templateUrl: './diagnosis.component.html',
     styleUrls: ['./diagnosis.component.css']
 })
-export class DiagnosisComponent implements OnInit {
+export class DiagnosisComponent implements OnInit, AfterContentInit {
     
-    positiveIndivDiseaseChanged:boolean = false;
+    /*positiveIndivDiseaseChanged:boolean = false;
     negativeIndivDiseaseChanged:boolean = false;
     negativeIndivNoDiseaseChanged:boolean = false;
-    positiveIndivNoDiseaseChanged:boolean = false;
+    positiveIndivNoDiseaseChanged:boolean = false;*/
 
     diagnosis: Diagnosis;
     lastDiagnosis: Diagnosis;
@@ -64,8 +67,8 @@ export class DiagnosisComponent implements OnInit {
     noOfRowsAndColumns: number;
     
     adjustPrevalenceBy: number = 0;
-    adjustSensitivityBy: number = 0;
-    adjustSpecificityBy: number = 0;
+    //adjustSensitivityBy: number = 0;
+    //adjustSpecificityBy: number = 0;
     
     calculated: boolean = false; //tracking whether calculate button has been pressed
     simulated: boolean = false; //tracking whether simulation sliders have ben used
@@ -74,9 +77,17 @@ export class DiagnosisComponent implements OnInit {
     positiveDataSource = POSITIVE_RATIO_DATA;
     displayedColumns = ['value', 'probability', 'interpretation'];
     
+    isMobileView: boolean = false;
+    subscriptionMedia: any;
+    sliderVertical: boolean = true;
+    
+    svgContainer: any;
+    
     //formModel: any;
 
-    constructor() { }
+    constructor(
+        public media: ObservableMedia
+    ) { }
 
     ngOnInit() {
         this.diagnosis = new Diagnosis();
@@ -108,6 +119,30 @@ export class DiagnosisComponent implements OnInit {
                 ]
             )
         });
+        
+        //checking whether on mobile or desktop 
+        this.isMobileView = this.media.isActive('xs');
+        this.subscriptionMedia = this.media.subscribe((change:MediaChange) => {
+            this.isMobileView = change.mqAlias === 'xs';
+            if(this.isMobileView) {
+                this.sliderVertical = false;
+            } else {
+                this.sliderVertical = true;
+            }
+        }); 
+    }
+    
+    ngAfterContentInit() {
+        let parentDiv = document.getElementById("d3Graph");
+        this.svgContainer = d3.select(parentDiv)
+                                .append("div")
+                                .classed("svg-container", true) //container class to make it responsive
+                                .append("svg")
+                                //responsive SVG needs these 2 attributes and no width and height attr
+                                .attr("preserveAspectRatio", "xMinYMin meet")
+                                .attr("viewBox", "0 0 100 75")
+                                //class to make it responsive
+                                .classed("svg-content-responsive", true);
     }
     
     onSubmit() {
@@ -142,30 +177,33 @@ export class DiagnosisComponent implements OnInit {
         
         let adjustPrevalenceByMultiplier: number = this.adjustPrevalenceBy/100;
         //change formModel.positiveIndivDisease
-        this.diagnosis.positiveIndivDisease = Math.round(this.lastDiagnosis.positiveIndivDisease + (adjustPrevalenceByMultiplier * this.lastDiagnosis.positiveIndivDisease));
+        //this.diagnosis.positiveIndivDisease = Math.round(this.lastDiagnosis.positiveIndivDisease + (adjustPrevalenceByMultiplier * this.lastDiagnosis.positiveIndivDisease));
+        this.diagnosis.positiveIndivDisease = this.lastDiagnosis.positiveIndivDisease + (adjustPrevalenceByMultiplier * this.lastDiagnosis.positiveIndivDisease);
         if(this.lastDiagnosis.positiveIndivDisease > 0) {
-            this.diagnosis.negativeIndivDisease = Math.round((this.lastDiagnosis.negativeIndivDisease/this.lastDiagnosis.positiveIndivDisease) * this.diagnosis.positiveIndivDisease);
+            //this.diagnosis.negativeIndivDisease = Math.round((this.lastDiagnosis.negativeIndivDisease/this.lastDiagnosis.positiveIndivDisease) * this.diagnosis.positiveIndivDisease);
+            this.diagnosis.negativeIndivDisease = (this.lastDiagnosis.negativeIndivDisease/this.lastDiagnosis.positiveIndivDisease) * this.diagnosis.positiveIndivDisease;
         } else {
             this.diagnosis.negativeIndivDisease = this.lastDiagnosis.negativeIndivDisease;
         }
         
-        this.diagnosis.negativeIndivNoDisease = Math.round(this.lastDiagnosis.specificity * (this.lastDiagnosis.totalIndiv - (this.diagnosis.positiveIndivDisease + this.diagnosis.negativeIndivDisease)));
+        //this.diagnosis.negativeIndivNoDisease = Math.round(this.lastDiagnosis.specificity * (this.lastDiagnosis.totalIndiv - (this.diagnosis.positiveIndivDisease + this.diagnosis.negativeIndivDisease)));
+        this.diagnosis.negativeIndivNoDisease = this.lastDiagnosis.specificity * (this.lastDiagnosis.totalIndiv - (this.diagnosis.positiveIndivDisease + this.diagnosis.negativeIndivDisease));
         this.diagnosis.positiveIndivNoDisease = this.lastDiagnosis.totalIndiv - (this.diagnosis.positiveIndivDisease + this.diagnosis.negativeIndivDisease + this.diagnosis.negativeIndivNoDisease);
         
         this.upDate2x2();
         
         /* making inputs pulse */
-        this.positiveIndivDiseaseChanged = true;
-        this.negativeIndivDiseaseChanged = true;
-        this.negativeIndivNoDiseaseChanged = true;
-        this.positiveIndivNoDiseaseChanged = true;
+        //this.positiveIndivDiseaseChanged = true;
+        //this.negativeIndivDiseaseChanged = true;
+        //this.negativeIndivNoDiseaseChanged = true;
+        //this.positiveIndivNoDiseaseChanged = true;
         
-        setTimeout(()=> {
-            this.positiveIndivDiseaseChanged = false;
-            this.negativeIndivDiseaseChanged = false;
-            this.negativeIndivNoDiseaseChanged = false;
-            this.positiveIndivNoDiseaseChanged = false;
-        }, 1000);
+        //setTimeout(()=> {
+        //    this.positiveIndivDiseaseChanged = false;
+        //    this.negativeIndivDiseaseChanged = false;
+        //    this.negativeIndivNoDiseaseChanged = false;
+        //    this.positiveIndivNoDiseaseChanged = false;
+        //}, 1000);
         
         this.updateValuesForCates();
         
@@ -179,10 +217,11 @@ export class DiagnosisComponent implements OnInit {
         this.diagnosis.specificity = this.lastDiagnosis.specificity;
         this.adjustPrevalenceBy = 0;
         
-        this.diagnosis.positiveIndivDisease = Math.round((this.lastDiagnosis.positiveIndivDisease + this.lastDiagnosis.negativeIndivDisease) * this.diagnosis.sensitivity);
-        console.log(this.lastDiagnosis.positiveIndivDisease);
-        console.log(this.lastDiagnosis.negativeIndivDisease);
-        console.log(this.diagnosis.sensitivity);
+        //this.diagnosis.positiveIndivDisease = Math.round((this.lastDiagnosis.positiveIndivDisease + this.lastDiagnosis.negativeIndivDisease) * this.diagnosis.sensitivity);
+        this.diagnosis.positiveIndivDisease = (this.lastDiagnosis.positiveIndivDisease + this.lastDiagnosis.negativeIndivDisease) * this.diagnosis.sensitivity;
+        //console.log(this.lastDiagnosis.positiveIndivDisease);
+        //console.log(this.lastDiagnosis.negativeIndivDisease);
+        //console.log(this.diagnosis.sensitivity);
         
         this.diagnosis.negativeIndivDisease = (this.lastDiagnosis.positiveIndivDisease + this.lastDiagnosis.negativeIndivDisease)-this.diagnosis.positiveIndivDisease;
         this.diagnosis.negativeIndivNoDisease = this.lastDiagnosis.negativeIndivNoDisease;
@@ -191,13 +230,13 @@ export class DiagnosisComponent implements OnInit {
         this.upDate2x2();
         
         /* making inputs pulse */
-        this.positiveIndivDiseaseChanged = true;
-        this.negativeIndivDiseaseChanged = true;
+        //this.positiveIndivDiseaseChanged = true;
+        //this.negativeIndivDiseaseChanged = true;
         
-        setTimeout(()=> {
-            this.positiveIndivDiseaseChanged = false;
-            this.negativeIndivDiseaseChanged = false;
-        }, 1000);
+        //setTimeout(()=> {
+        //    this.positiveIndivDiseaseChanged = false;
+        //    this.negativeIndivDiseaseChanged = false;
+        //}, 1000);
         
         this.updateValuesForCates();
         
@@ -213,19 +252,20 @@ export class DiagnosisComponent implements OnInit {
         
         this.diagnosis.positiveIndivDisease = this.lastDiagnosis.positiveIndivDisease;
         this.diagnosis.negativeIndivDisease = this.lastDiagnosis.negativeIndivDisease;
-        this.diagnosis.negativeIndivNoDisease = Math.round((this.lastDiagnosis.negativeIndivNoDisease + this.lastDiagnosis.positiveIndivNoDisease) * this.diagnosis.specificity);
+        //this.diagnosis.negativeIndivNoDisease = Math.round((this.lastDiagnosis.negativeIndivNoDisease + this.lastDiagnosis.positiveIndivNoDisease) * this.diagnosis.specificity);
+        this.diagnosis.negativeIndivNoDisease = (this.lastDiagnosis.negativeIndivNoDisease + this.lastDiagnosis.positiveIndivNoDisease) * this.diagnosis.specificity;
         this.diagnosis.positiveIndivNoDisease = (this.lastDiagnosis.negativeIndivNoDisease + this.lastDiagnosis.positiveIndivNoDisease)-this.diagnosis.negativeIndivNoDisease;
         
         this.upDate2x2();
         
         /* making inputs pulse */
-        this.negativeIndivNoDiseaseChanged = true;
-        this.positiveIndivNoDiseaseChanged = true;
+        //this.negativeIndivNoDiseaseChanged = true;
+        //this.positiveIndivNoDiseaseChanged = true;
         
-        setTimeout(()=> {
-            this.negativeIndivNoDiseaseChanged = false;
-            this.positiveIndivNoDiseaseChanged = false;
-        }, 1000);
+        //setTimeout(()=> {
+        //    this.negativeIndivNoDiseaseChanged = false;
+        //    this.positiveIndivNoDiseaseChanged = false;
+        //}, 1000);
         
         this.updateValuesForCates();
         
@@ -236,8 +276,8 @@ export class DiagnosisComponent implements OnInit {
     
     onReset() {
         this.adjustPrevalenceBy = 0;
-        this.adjustSensitivityBy = 0;
-        this.adjustSpecificityBy = 0;
+        //this.adjustSensitivityBy = 0;
+        //this.adjustSpecificityBy = 0;
         //this.diagnosis = Object.assign({}, this.lastDiagnosis); 
         this.diagnosis.positiveIndivNoDisease = this.lastDiagnosis.positiveIndivNoDisease;
         this.diagnosis.negativeIndivNoDisease = this.lastDiagnosis.negativeIndivNoDisease;
@@ -267,5 +307,46 @@ export class DiagnosisComponent implements OnInit {
         this.noOfOK = Math.round(this.diagnosis.positiveIndivNoDisease/this.diagnosis.totalIndiv * this.denominator);
         this.noOfLetDown = Math.round(this.diagnosis.negativeIndivDisease/this.diagnosis.totalIndiv * this.denominator);
         this.noOfGood = this.denominator - (this.noOfBad + this.noOfOK + this.noOfLetDown);
+        
+        //temporarily launch D3 from here
+        let jsonCircles = [
+             { "x_axis": 25, "y_axis": 37, "radius": this.noOfBad/2, "color" : "red" },
+             { "x_axis": 75, "y_axis": 37, "radius": this.noOfOK/2, "color" : "purple" },
+        ];
+        
+        this.updateSvg(jsonCircles);
+        
+        /*let circles = this.svgContainer.selectAll("circle")
+                          .data(jsonCircles)
+                          .enter()
+                          .append("circle");
+        
+        let circleAttributes = circles
+                       .attr("cx", function (d) { return d.x_axis; })
+                       .attr("cy", function (d) { return d.y_axis; })
+                       .attr("r", function (d) { return d.radius; })
+                       .style("fill", function(d) { return d.color; });*/
+        
+        //console.log(circles);
+        
+    }
+    
+    updateSvg(jsonCircles) {
+        let circles = this.svgContainer.selectAll("circle")
+                          .data(jsonCircles);
+        circles
+            .enter()
+            .append("circle");
+        
+        // Remove old elements as needed.
+        circles
+            .exit()
+            .remove();
+        
+        let circleAttributes = circles
+            .attr("cx", function (d) { return d.x_axis; })
+            .attr("cy", function (d) { return d.y_axis; })
+            .attr("r", function (d) { return d.radius; })
+            .style("fill", function(d) { return d.color; });
     }
 }

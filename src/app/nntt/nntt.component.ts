@@ -78,10 +78,10 @@ export class NnttComponent implements OnInit {
             )
         });
         
-        //checking whether on mobile or desktop for full-text panel
-        this.isMobileView = this.media.isActive('xs');// || this.media.isActive('md'));// || this.media.isActive('lg'));
+        //checking whether on mobile or desktop 
+        this.isMobileView = this.media.isActive('xs');
         this.subscriptionMedia = this.media.subscribe((change:MediaChange) => {
-            this.isMobileView = change.mqAlias === 'xs';// || change.mqAlias === 'md');//  || change.mqAlias === 'lg');
+            this.isMobileView = change.mqAlias === 'xs';
             if(this.isMobileView) {
                 this.sliderVertical = false;
             } else {
