@@ -81,7 +81,18 @@ export class DiagnosisComponent implements OnInit, AfterContentInit {
     subscriptionMedia: any;
     sliderVertical: boolean = true;
     
+    svgWidth: number = 200;
+    svgHeight: number = 100;
+    //svgPadding: number = 20;
+    //simulation: any;
     svgContainer: any;
+    circles: any;
+    jsonCircles: any;
+    
+    showWhatinSVG: number = 0;
+    
+    label1: string;
+    label2: string;
     
     //formModel: any;
 
@@ -140,9 +151,25 @@ export class DiagnosisComponent implements OnInit, AfterContentInit {
                                 .append("svg")
                                 //responsive SVG needs these 2 attributes and no width and height attr
                                 .attr("preserveAspectRatio", "xMinYMin meet")
-                                .attr("viewBox", "0 0 100 75")
+                                .attr("viewBox", "0 0 "+this.svgWidth+" "+this.svgHeight)
                                 //class to make it responsive
                                 .classed("svg-content-responsive", true);
+        /*this.simulation = d3.forceSimulation()
+            .force("forceX", d3.forceX().strength(.1).x(this.svgWidth * .5))
+            .force("forceY", d3.forceY().strength(.1).y(this.svgHeight * .5))
+            .force("center", d3.forceCenter().x(this.svgWidth * .5).y(this.svgHeight * .5))
+            .force("charge", d3.forceManyBody().strength(-15));
+        this.simulation
+          .force("collide", d3.forceCollide().strength(.5).radius((d)=>{ return d.radius + this.svgPadding; }).iterations(1))
+          .on("tick", (d)=>{
+            this.circles
+                .attr("cx", function(d){ return d.x; })
+                .attr("cy", function(d){ return d.y; })
+          });
+        
+        this.circles = this.svgContainer.selectAll("circle");//svg.append("g")
+            //.attr("class", "node")
+            //.selectAll("circle");*/
     }
     
     onSubmit() {
@@ -167,6 +194,7 @@ export class DiagnosisComponent implements OnInit, AfterContentInit {
         this.lastDiagnosis.positiveIndivDisease = this.diagnosis.positiveIndivDisease;
         this.lastDiagnosis.negativeIndivDisease = this.diagnosis.negativeIndivDisease;
         this.lastDiagnosis.specificity = this.diagnosis.specificity;
+        this.lastDiagnosis.sensitivity = this.diagnosis.sensitivity;
         this.lastDiagnosis.totalIndiv = this.diagnosis.totalIndiv;
     }
     
@@ -302,51 +330,95 @@ export class DiagnosisComponent implements OnInit, AfterContentInit {
         });
     }
     
+    onShowWhatChange() {
+        this.updateValuesForCates();
+    }
+    
     updateValuesForCates() {
-        this.noOfBad = Math.round(this.diagnosis.positiveIndivDisease/this.diagnosis.totalIndiv * this.denominator);
-        this.noOfOK = Math.round(this.diagnosis.positiveIndivNoDisease/this.diagnosis.totalIndiv * this.denominator);
-        this.noOfLetDown = Math.round(this.diagnosis.negativeIndivDisease/this.diagnosis.totalIndiv * this.denominator);
+        this.noOfBad = Math.round((this.diagnosis.positiveIndivDisease/this.diagnosis.totalIndiv) * this.denominator);
+        this.noOfOK = Math.round((this.diagnosis.positiveIndivNoDisease/this.diagnosis.totalIndiv) * this.denominator);
+        //console.log(this.diagnosis.positiveIndivNoDisease + " " + this.diagnosis.totalIndiv + " " this.denominator + " " + this.noOfOK);
+        this.noOfLetDown = Math.round((this.diagnosis.negativeIndivDisease/this.diagnosis.totalIndiv) * this.denominator);
         this.noOfGood = this.denominator - (this.noOfBad + this.noOfOK + this.noOfLetDown);
         
-        //temporarily launch D3 from here
-        let jsonCircles = [
-             { "x_axis": 25, "y_axis": 37, "radius": this.noOfBad/2, "color" : "red" },
-             { "x_axis": 75, "y_axis": 37, "radius": this.noOfOK/2, "color" : "purple" },
+        let radius1: number;
+        let radius2: number;
+        let label1: string;
+        let label2: string;
+        //react to button group for what to show        
+        if(this.showWhatinSVG==0){
+            //+ve test
+            radius1 = this.noOfOK/2;  //false positive
+            radius2 = this.noOfBad/2; //true positive
+            this.label1 = "false positive";
+            this.label2 = "true positive";
+        } else if(this.showWhatinSVG==1){
+            //-ve test
+            radius1 = this.noOfLetDown/2; //false negative
+            radius2 = this.noOfGood/2;  //true negative
+            this.label1 = "false negative";
+            this.label2 = "true negative";
+        } else if(this.showWhatinSVG==2){
+            //+ve likelihood
+            radius1 = this.diagnosis.sensitivity * 50; //sensitivity
+            radius2 = (1-this.diagnosis.specificity) * 50;  //1 - specificity
+            this.label1 = "sensitivity";
+            this.label2 = "1-specifcity";
+        } else if(this.showWhatinSVG==3){
+            //ive likelihood
+            radius1 = (1-this.diagnosis.sensitivity) * 50; //1 - sensitivity
+            radius2 = this.diagnosis.specificity * 50;  //specificity
+            this.label1 = "1-sensitivity";
+            this.label2 = "specifcity";
+        }
+        
+        console.log(this.showWhatinSVG);
+        console.log(radius1 + " " + radius2);
+        
+        this.jsonCircles = [
+            { "cx": 50, "cy": 50, "radius": radius1, "color" : "#e8ab1e", "label": this.label1 },
+            { "cx": 150, "cy": 50, "radius": radius2, "color" : "#002147", "label": this.label2 },
         ];
         
-        this.updateSvg(jsonCircles);
+        this.circles = this.svgContainer.selectAll("circle")
+                          .data(this.jsonCircles);
         
-        /*let circles = this.svgContainer.selectAll("circle")
-                          .data(jsonCircles)
-                          .enter()
-                          .append("circle");
-        
-        let circleAttributes = circles
-                       .attr("cx", function (d) { return d.x_axis; })
-                       .attr("cy", function (d) { return d.y_axis; })
-                       .attr("r", function (d) { return d.radius; })
-                       .style("fill", function(d) { return d.color; });*/
-        
-        //console.log(circles);
+        this.updateSvg();
         
     }
     
-    updateSvg(jsonCircles) {
-        let circles = this.svgContainer.selectAll("circle")
-                          .data(jsonCircles);
-        circles
-            .enter()
-            .append("circle");
+    updateSvg(){
         
-        // Remove old elements as needed.
-        circles
+        var elemEnter = this.circles.enter()
+            .append("g")
+            .attr("class", "node-group");
+        
+        var circle = elemEnter.append("circle")
+                //.append("circle")
+                .attr("cx", function (d) { return d.cx; })
+                .attr("cy", function (d) { return d.cy; })
+                .attr("r", function (d) { return d.radius; })
+                .style("fill", function(d) { return d.color; })
+                .style("fill-opacity", .3)
+                .style("fill", function(d) { return d.color; })
+                .style("stroke-opacity", 0.8)
+                .style("stroke-width", 0.3)
+                .style("stroke", function(d) { return d.color; });
+                
+        let circleAttributes = this.circles
+            .attr("cx", function (d) { return d.cx; })
+            .attr("cy", function (d) { return d.cy; })
+            .attr("r", function (d) { return d.radius; })
+            .style("fill", function(d) { return d.color; })
+            .style("fill-opacity", .3)
+            .style("fill", function(d) { return d.color; })
+            .style("stroke-opacity", 0.8)
+            .style("stroke-width", 0.3)
+            .style("stroke", function(d) { return d.color; });
+        
+        this.circles
             .exit()
             .remove();
         
-        let circleAttributes = circles
-            .attr("cx", function (d) { return d.x_axis; })
-            .attr("cy", function (d) { return d.y_axis; })
-            .attr("r", function (d) { return d.radius; })
-            .style("fill", function(d) { return d.color; });
     }
 }

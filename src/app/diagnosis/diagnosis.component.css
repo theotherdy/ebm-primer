@@ -20,6 +20,10 @@
     left: 0;
 }
 
+.graph-label {
+    padding: 5px 0 0 0;
+}
+
 /*.form-column {
   padding: 0px 10px 0px 0px;
 }

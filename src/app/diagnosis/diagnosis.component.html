@@ -266,10 +266,21 @@
                     </mat-accordion>
                 </div>  
 
-                <div fxFlex="50" fxLayout="row" fxLayoutAlign="center center">
+                <div fxFlex="50" fxLayout="row" fxLayoutAlign="start stretch">
                     <div fxFlex="100%">
+                        <div fxLayout="row" fxLayoutAlign="center start">
+                            <mat-button-toggle-group aria-label="Show what" [(ngModel)]="showWhatinSVG" (change)="onShowWhatChange()">
+                                <mat-button-toggle value=0>+ve test</mat-button-toggle>
+                                <mat-button-toggle value=1>-ve test</mat-button-toggle>
+                                <mat-button-toggle value=2>+ve l'hood</mat-button-toggle>
+                                <mat-button-toggle value=3>-ve l'hood</mat-button-toggle>
+                            </mat-button-toggle-group>
+                        </div>
                         <!--cates-component *ngIf="diagnosis?.updated" [noOfGood]="noOfGood" [noOfOK]="noOfOK" [noOfLetDown]="noOfLetDown" [noOfBad]="noOfBad" [textGood]="textGood" [textOK]="textOK" [textLetDown]="textLetDown" [textBad]="textBad" [noOfRowsAndColumns]="noOfRowsAndColumns" type="diagnosis"></cates-component-->
                         <div id="d3Graph"></div>
+                        <div fxLayout="row" fxLayoutAlign="space-around start">
+                            <div class="graph-label">{{label1}}</div><div class="graph-label">{{label2}}</div>
+                        </div>
                     </div>
                 </div>
             </div>
