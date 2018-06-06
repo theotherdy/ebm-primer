@@ -204,7 +204,7 @@
                         <mat-expansion-panel>
                             <mat-expansion-panel-header title="Number Needed to Treat">
                                 <mat-panel-title class="fixed-width-title">
-                                    Number Needed to Treat
+                                    Number Needed to Treat (or Harm)
                                 </mat-panel-title>
                                 <mat-panel-description>
                                     <changer-component [value]="study?.numberNtt | number:'1.1-1'"></changer-component>
@@ -212,7 +212,7 @@
                                 </mat-panel-description>
                             </mat-expansion-panel-header>
                             <!--h3>Number Needed to Treat</h3-->
-                            <p><em>Number Needed to Treat</em> (NNT) is the number of patients, on average, who need to be treated to prevent one bad outcome. It is the inverse of the Risk Difference <span *ngIf="calculated">(RD = {{study?.riskDiff | number:'1.2-2'}})</span>: NNT=1/RD <span *ngIf="calculated">({{study?.numberNtt | number:'1.1-1'}} = 1 / {{study?.riskDiff | number:'1.2-2'}})</span></p>
+                            <p><em>Number Needed to Treat/Harm</em> (NNT) is the number of patients, on average, who need to be treated to prevent/cause one bad outcome. It is the inverse of the Risk Difference <span *ngIf="calculated">(RD = {{study?.riskDiff | number:'1.2-2'}})</span>: NNT=1/RD <span *ngIf="calculated">({{study?.numberNtt | number:'1.1-1'}} = 1 / {{study?.riskDiff | number:'1.2-2'}})</span></p>
                         </mat-expansion-panel>
                     </mat-accordion>
                 </div>  
