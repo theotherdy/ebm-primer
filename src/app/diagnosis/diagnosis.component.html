@@ -2,7 +2,7 @@
     <div fxFlex="50%" fxFlex.lt-lg="100%">
         <div fxLayout="column" fxLayoutAlign="start stretch">
             <div fxFlex="50">
-                <mat-card>
+                <mat-card class="card-input">
                     <mat-card-content>
                         <div fxLayout='row' fxLayout.lt-sm="column" fxLayoutAlign="center start" fxLayoutAlign.xs="start stretch">
                             <div fxFlex="nowgrow" fxFlex.xs="grow" fxLayout='row' fxLayoutAlign="start start" class="card-column">
@@ -12,13 +12,13 @@
                                             <thead>
                                                 <tr>
                                                     <th scope="col"></th>
-                                                    <th scope="col" class="cell-left-vertical">Condition</th>
-                                                    <th scope="col" class="cell-left-vertical">No condition</th>
+                                                    <th scope="col" class="cell-left-vertical">Ref. test positive</th>
+                                                    <th scope="col" class="cell-left-vertical">Ref. test negative</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <tr>
-                                                    <th scope="row" class="row-header">Positive</th>
+                                                    <th scope="row" class="row-header">Index test positive</th>
                                                     <td class="form-table-column cell-left-vertical">
                                                         <mat-form-field *ngIf="!simulated" class="full-width">
                                                             <input type="number" min="0" step="1" matInput required formControlName="positiveIndivDisease" name="positiveIndivDisease" class="full-width">
@@ -43,7 +43,7 @@
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <th scope="row" class="row-header">Negative</th>
+                                                    <th scope="row" class="row-header">Index test negative</th>
                                                     <td class="form-table-column cell-left-vertical">
                                                         <mat-form-field *ngIf="!simulated" class="full-width">
                                                             <input type="number" min="0" step="1" matInput required formControlName="negativeIndivDisease" name="negativeIndivDisease" class="full-width">
@@ -100,7 +100,7 @@
                                         </mat-slider>
                                     </div>
                                 </div>
-                                <div fxFlex="nogrow" fxLayout='column' fxLayout.lt-sm="row" fxLayoutAlign="start center" class="slider-container card-column"> 
+                                <!--div fxFlex="nogrow" fxLayout='column' fxLayout.lt-sm="row" fxLayoutAlign="start center" class="slider-container card-column"> 
                                     <div fxFlex="nogrow">
                                         <h3 class="header-no-top-margin header-no-bottom-margin header-slider">Sensitivity&nbsp;<i class="fa fa-question-circle-o" matTooltip="Drag to set value of sensitivity"></i>
                                         </h3>
@@ -141,7 +141,7 @@
                                             >
                                         </mat-slider>
                                     </div>
-                                </div>
+                                </div-->
                                 <div fxFlex="nogrow" fxFlex.xs="100%" fxLayout='column' fxLayoutAlign="end center" fxLayoutAlign.xs="end center" class="card-column"> 
                                     <div>
                                         <button mat-fab [disabled]="!(calculated && simulated)" class="btn btn-success" color="accent" (click)="onReset()" title="Reset"><mat-icon>replay</mat-icon></button>
@@ -153,7 +153,7 @@
                 </mat-card>
             </div>
             <div fxFlex="50" fxLayout='row' fxLayout.lt-sm="column" class="results-panel"> 
-                <div fxFlex="50">
+                <div fxFlex="50" class="accordion-panel">
                     <mat-accordion>
                         <mat-expansion-panel>
                             <mat-expansion-panel-header>
@@ -268,19 +268,32 @@
 
                 <div fxFlex="50" fxLayout="row" fxLayoutAlign="start stretch">
                     <div fxFlex="100%">
-                        <div fxLayout="row" fxLayoutAlign="center start">
-                            <mat-button-toggle-group aria-label="Show what" [(ngModel)]="showWhatinSVG" (change)="onShowWhatChange()">
-                                <mat-button-toggle value=0>+ve test</mat-button-toggle>
-                                <mat-button-toggle value=1>-ve test</mat-button-toggle>
-                                <mat-button-toggle value=2>+ve l'hood</mat-button-toggle>
-                                <mat-button-toggle value=3>-ve l'hood</mat-button-toggle>
-                            </mat-button-toggle-group>
-                        </div>
-                        <!--cates-component *ngIf="diagnosis?.updated" [noOfGood]="noOfGood" [noOfOK]="noOfOK" [noOfLetDown]="noOfLetDown" [noOfBad]="noOfBad" [textGood]="textGood" [textOK]="textOK" [textLetDown]="textLetDown" [textBad]="textBad" [noOfRowsAndColumns]="noOfRowsAndColumns" type="diagnosis"></cates-component-->
-                        <div id="d3Graph"></div>
-                        <div fxLayout="row" fxLayoutAlign="space-around start">
-                            <div class="graph-label">{{label1}}</div><div class="graph-label">{{label2}}</div>
-                        </div>
+                        <!--mat-card class="card-graph"-->
+                            <!--mat-card-content-->
+                                <div fxLayout="row" fxLayoutAlign="center start" class="select-box">
+                                    <!--mat-form-field-->
+                                    <span class="select-label">Show: </span> 
+                                    <mat-select [(ngModel)]="showWhatinSVG" (change)="onShowWhatChange()" [disabled]="!calculated" class="select-show-what">
+                                        <mat-option value="0">Positive reference test</mat-option>
+                                        <mat-option value="1">Negative reference test</mat-option>
+                                        <mat-option value="2">Positive likelihood</mat-option>
+                                        <mat-option value="3">Negative likelihood</mat-option>
+                                    </mat-select>
+                                    <!--/mat-form-field-->
+                                    <!--mat-button-toggle-group aria-label="Show what" [(ngModel)]="showWhatinSVG" (change)="onShowWhatChange()">
+                                        <mat-button-toggle value=0>+ve test</mat-button-toggle>
+                                        <mat-button-toggle value=1>-ve test</mat-button-toggle>
+                                        <mat-button-toggle value=2>+ve l'hood</mat-button-toggle>
+                                        <mat-button-toggle value=3>-ve l'hood</mat-button-toggle>
+                                    </mat-button-toggle-group-->
+                                </div>
+                                <!--cates-component *ngIf="diagnosis?.updated" [noOfGood]="noOfGood" [noOfOK]="noOfOK" [noOfLetDown]="noOfLetDown" [noOfBad]="noOfBad" [textGood]="textGood" [textOK]="textOK" [textLetDown]="textLetDown" [textBad]="textBad" [noOfRowsAndColumns]="noOfRowsAndColumns" type="diagnosis"></cates-component-->
+                                <div id="d3Graph"></div>
+                                <div fxLayout="row" fxLayoutAlign="space-around start">
+                                    <div class="graph-label">{{label1}}</div><div class="graph-label">{{label2}}</div>
+                                </div>
+                            <!--/mat-card-content-->
+                        <!--/mat-card-->
                     </div>
                 </div>
             </div>

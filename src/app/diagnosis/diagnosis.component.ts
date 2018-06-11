@@ -89,7 +89,7 @@ export class DiagnosisComponent implements OnInit, AfterContentInit {
     circles: any;
     jsonCircles: any;
     
-    showWhatinSVG: number = 0;
+    showWhatinSVG: string = "0";
     
     label1: string;
     label2: string;
@@ -345,26 +345,29 @@ export class DiagnosisComponent implements OnInit, AfterContentInit {
         let radius2: number;
         let label1: string;
         let label2: string;
+        
+    console.log(this.showWhatinSVG);
+        
         //react to button group for what to show        
-        if(this.showWhatinSVG==0){
+        if(this.showWhatinSVG=="0"){
             //+ve test
             radius1 = this.noOfOK/2;  //false positive
             radius2 = this.noOfBad/2; //true positive
             this.label1 = "false positive";
             this.label2 = "true positive";
-        } else if(this.showWhatinSVG==1){
+        } else if(this.showWhatinSVG=="1"){
             //-ve test
             radius1 = this.noOfLetDown/2; //false negative
             radius2 = this.noOfGood/2;  //true negative
             this.label1 = "false negative";
             this.label2 = "true negative";
-        } else if(this.showWhatinSVG==2){
+        } else if(this.showWhatinSVG=="2"){
             //+ve likelihood
             radius1 = this.diagnosis.sensitivity * 50; //sensitivity
             radius2 = (1-this.diagnosis.specificity) * 50;  //1 - specificity
             this.label1 = "sensitivity";
             this.label2 = "1-specifcity";
-        } else if(this.showWhatinSVG==3){
+        } else if(this.showWhatinSVG=="3"){
             //ive likelihood
             radius1 = (1-this.diagnosis.sensitivity) * 50; //1 - sensitivity
             radius2 = this.diagnosis.specificity * 50;  //specificity

@@ -15,7 +15,8 @@ import { ChangerModule } from '../changer/changer.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatTabsModule} from '@angular/material';
 import {MatFormFieldModule} from '@angular/material';
-import {MatButtonToggleModule} from '@angular/material/button-toggle';
+//import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import {MatSelectModule} from '@angular/material/select';
 import {MatInputModule} from '@angular/material';
 import {MatButtonModule} from '@angular/material';
 import {MatIconModule} from '@angular/material';
@@ -35,7 +36,8 @@ import {MatTableModule} from '@angular/material/table';
         BrowserAnimationsModule,
         MatTabsModule,
         MatFormFieldModule,
-        MatButtonToggleModule,
+        //MatButtonToggleModule,
+        MatSelectModule,
         MatInputModule,
         MatButtonModule,
         MatIconModule,
