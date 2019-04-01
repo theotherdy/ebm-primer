@@ -161,9 +161,8 @@ export class NnttComponent implements OnInit {
             this.eventIndivIntervChanged = false;
         }, 1000);
         
-        this.updateValuesForCates();
-        
         this.study.calculate();
+        this.updateValuesForCates();
         this.calculated = true;
         this.simulated = true;
     }
@@ -179,9 +178,9 @@ export class NnttComponent implements OnInit {
         this.study.eventRateInterv = this.lastStudy.eventRateInterv;
         
         this.upDate2x2();
-        this.updateValuesForCates();
-        
+                
         this.study.calculate();
+        this.updateValuesForCates();
         this.calculated = true;
         this.simulated = false;
         

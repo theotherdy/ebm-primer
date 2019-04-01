@@ -366,13 +366,13 @@ export class DiagnosisComponent implements OnInit, AfterContentInit {
             radius1 = this.diagnosis.sensitivity * 50; //sensitivity
             radius2 = (1-this.diagnosis.specificity) * 50;  //1 - specificity
             this.label1 = "sensitivity";
-            this.label2 = "1-specifcity";
+            this.label2 = "1-specificity";
         } else if(this.showWhatinSVG=="3"){
             //ive likelihood
             radius1 = (1-this.diagnosis.sensitivity) * 50; //1 - sensitivity
             radius2 = this.diagnosis.specificity * 50;  //specificity
             this.label1 = "1-sensitivity";
-            this.label2 = "specifcity";
+            this.label2 = "specificity";
         }
         
         console.log(this.showWhatinSVG);
